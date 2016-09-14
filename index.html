@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do list</title>
+	<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+				<br>
+				<h1>To Do list</h1>
+				<br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<form class="newtask">
+							<input type="text" name="" class="form-control input-lg" value="" placeholder="Create new task...">
+						</form>
+					</div>
+					<div class="panel-body text-center">
+						<h3>New tasks</h3>
+						<span class="no-new text-muted">No tasks</span>
+					</div>
+					<ul class="tasks tasks-new list-group"></ul>
+					<div class="panel-body text-center">
+						<h3>Completed tasks</h3>
+						<span class="no-done text-muted">No tasks</span>
+					</div>
+					<ul class="tasks tasks-done list-group"></ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="control col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+				<button data-target="#settings" data-toggle="modal" class="settings btn btn-lg btn-link"><i class="fa fa-cog"></i> Settings</button>
+				<button class="clear btn btn-lg btn-link"><i class="fa fa-trash-o"></i> Delete completed tasks</button>
+			</div>
+		</div>
+		<br>
+	</div>
+	<div class="modal fade" id="settings">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Settings</h4>
+				</div>
+				<div class="modal-body">
+					<form class="settings">
+						<h3>Sync passphrase</h3>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<input type="text" class="passphrase input-lg form-control">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<button style="width: 100%;" class="tasks-load btn btn-lg btn-primary"><i class="fa fa-cloud-download"></i> Load tasks</button>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+								<button style="width: 100%;" class="tasks-save btn btn-lg btn-primary"><i class="fa fa-cloud-upload"></i> Save tasks</button>
+							</div>
+						</div>
+						<h3>Color</h3>
+						<div class="row">
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color01" name="color" value="color01">
+								<label for="color01" class="color-label img-rounded" style="background-color: #b24436;"><i class="fa fa-check"></i></label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color02" name="color" value="color02">
+								<label for="color02" class="color-label img-rounded" style="background-color: #996c4c;"><i class="fa fa-check"></i></label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color03" name="color" value="color03">
+								<label for="color03" class="color-label img-rounded" style="background-color: #397360;"><i class="fa fa-check"></i></label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color04" name="color" value="color04">
+								<label for="color04" class="color-label img-rounded" style="background-color: #364459;"><i class="fa fa-check"></i></label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color05" name="color" value="color05">
+								<label for="color05" class="color-label img-rounded" style="background-color: #41364c;"><i class="fa fa-check"></i></label>
+							</div>
+							<div class="col-xs-4 col-sm-3 col-md-2">
+								<input class="color-radio hidden" type="radio" id="color06" name="color" value="color06">
+								<label for="color06" class="color-label img-rounded" style="background-color: #333333;"><i class="fa fa-check"></i></label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
