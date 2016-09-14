@@ -108,7 +108,7 @@
 		})
 		.done(fd)
 		.fail(ff)
-		.always(console.log);
+		.always();
 	}
 
 	// Save in database
@@ -164,7 +164,7 @@
 	function saveSettings() {
 		param.passphrase = $('.passphrase').val();
 		param.color = $('input[name=color]').parent().find(':checked').val();
-		Cookies.set('ToDoList_param', param);
+		Cookies.set('ToDoList_param', param, {expires: 365});
 	}
 
 	// Load settings
