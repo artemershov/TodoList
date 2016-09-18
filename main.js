@@ -24,7 +24,7 @@
 
 	// Task html template
 	function taskRender(t) {
-		var i = '<li id="' + t.id + '" class="task-item list-group-item">' + t.title + '<i class="task-close fa fa-close"></i></li>';
+		var i = '<li id="' + t.id + '" class="task-item list-group-item"><i class="task-drag"></i><i class="task-check"></i>' + t.title + '<i class="task-close"></i></li>';
 		$(i).appendTo((t.complete) ? '.tasks-done' : '.tasks-new');
 	}
 	function renderAll(o) {
@@ -197,6 +197,7 @@
 		
 		// Sort
 		$('.tasks').sortable({
+			handle: '.task-drag',
 			deactivate: function(e) {
 				saveOrder();
 				saveTasks();

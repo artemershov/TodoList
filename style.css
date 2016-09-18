@@ -19,6 +19,8 @@ h1,
 	text-shadow: 0px 3px 7px rgba(0,0,0,0.3);
 }
 
+i {font-style: normal !important;}
+
 .panel {box-shadow: 0px 5px 10px rgba(0,0,0,0.5);}
 
 .form-control {font-size: 18px;}
@@ -30,6 +32,8 @@ h1,
 .btn-primary {border: none;}
 .btn-primary:hover {opacity: 0.9;}
 
+.input-lg {line-height: 46px;}
+
 :focus {outline-color: transparent !important;}
 ::-webkit-scrollbar {width: 10px;}
 ::-webkit-scrollbar-track {background: transparent;}
@@ -40,44 +44,74 @@ h1,
 .task-item {
 	position: relative;
 	cursor: pointer;
-	padding: 10px 50px;
+	padding: 10px 50px 10px 85px;
+	overflow: hidden;
 }
-.task-item:before,
+
+.task-drag, 
 .task-close {
-	width: 20px;
-	height: 20px;
-	padding-left: 1px;
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	margin: auto;
-	z-index: 100;
-	font-size: 14px;
-	line-height: 20px;
-	text-align: center;
-	border-radius: 3px;
-}
-.task-item:before {
-	content: '';
-	font-family: 'FontAwesome';
 	display: block;
-	left: 15px;
-	border: 2px solid #999;
+	width: 45px;
+	height: 45px;
+	z-index: 100;
+	background: #FFF;
 }
-.tasks-done .task-item:before {
-	content: "\f00c";
-	background: #999;
-	color: #FFF;
+.task-drag {left: 0;}
+.task-close {right: 0;}
+
+.task-drag:before,
+.task-check:before,
+.task-close:before {
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	font-size: 14px;
+}
+.task-check:before,
+.task-close:before {
+	border-radius: 3px;
+	text-align: center;
+	font-family: 'FontAwesome';
+}
+.task-drag:before {
+	content: '\e235\e235';
+	font-family: 'Glyphicons Halflings';
+	letter-spacing: -8px;
+	line-height: 19px;
+	color: #CCC;
+	text-align: left;
+}
+.task-drag:hover:before {color: #333;}
+.task-check:before {
+	content: '';
+	left: 45px;
+	right: auto;
+	border: 2px solid #999;
 	font-size: 15px;
 	line-height: 17px;
 }
-.task-close {
-	right: 15px;
+.tasks-done .task-check:before {
+	content: "\f00c";
+	background: #999;
+	color: #FFF;
+}
+.task-close:before {
+	content: '\f00d';
 	color: #CCC;
 }
-.task-close:hover {
+.task-close:hover:before {
 	background: #CC0000;
-	color: #FFF !important;
+	color: #FFF;
 }
 .tasks-done .task-item {
 	opacity: 0.5;
