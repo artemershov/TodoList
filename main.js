@@ -104,6 +104,7 @@
 		$.ajax({
 			url: 'database/db.php',
 			type: 'POST',
+			// dataType: 'jsonp',
 			data: d,
 		})
 		.done(fd)
@@ -130,6 +131,7 @@
 		function fd(d) {
 			if (d) {
 				tasks = JSON.parse(d);
+				// tasks = d; // if dataType set to jsonp
 				renderAll(tasks);
 			} else {
 				loadStorage();
