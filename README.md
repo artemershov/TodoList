@@ -8,4 +8,4 @@ Features:
 
 Check out the demo: [Link](http://artemershov.ru/apps/todo/)
 
-![ToDoList](http://i.imgur.com/wJiuSSU.png)
+![ToDoList](http://i.imgur.com/lKlkdMi.png)
