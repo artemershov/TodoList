@@ -68,6 +68,17 @@
 		noTasksCheck();
 	}
 
+	// Delete completed task
+	function deleteComleted(a) {
+		$(a).each(function(i,e) {
+			$(e).remove();
+			delete tasks[$(e).attr('id')];
+		});
+		saveOrder();
+		saveTasks();
+		noTasksCheck();
+	}
+
 	// Save order
 	function saveOrder() {
 		$('.task-item').each(function(i,e) {
@@ -227,9 +238,7 @@
 
 		// Delete completed tasks
 		$('.clear').on('click', function() {
-			$('.tasks-done .task-item').each(function() {
-				deleteTask(this);
-			});
+			deleteComleted($('.tasks-done .task-item'));
 		});
 
 		// Load tasks from server
