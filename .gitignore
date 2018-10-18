@@ -1,1 +1,7 @@
-database/data.db
+.cache
+build
+dist
+node_modules
+package-lock.json
+yarn.lock
+yarn-error.log

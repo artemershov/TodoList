@@ -1,0 +1,27 @@
+{
+  "name": "TodoList",
+  "version": "2.0.0",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-react-pug": "^6.0.1",
+    "babel-preset-env": "^1.7.0",
+    "cssnano": "^4.1.5",
+    "pug": "^2.0.3"
+  },
+  "scripts": {
+    "start": "parcel dev/index.pug --open",
+    "build": "rm -rf build && parcel build dev/index.pug -d build --no-source-maps",
+    "clean": "rm -rf .cache build dist node_modules yarn* package-lock.json"
+  },
+  "author": "Artem Ershov",
+  "license": "ISC"
+}

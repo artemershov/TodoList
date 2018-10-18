@@ -1,11 +1,12 @@
-#ToDo List
+# TodoList
+`parcel` + `react` + `pug` + `bootstrap`
 
-This is a simple todo list.
-Features:
-- Color themes
-- Auto save tasks in localStorage
-- Synchronization with database
+**Попробовать:**
+[http://artemershov.ru/apps/todo/](http://artemershov.ru/apps/todo/)
 
-Check out the demo: [Link](http://artemershov.ru/apps/todo/)
-
-![ToDoList](http://i.imgur.com/lKlkdMi.png)
+**Собрать и запустить:**
+```shell
+$ yarn global add parcel-bundler
+$ yarn install
+$ yarn run start
+```
