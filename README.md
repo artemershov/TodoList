@@ -6,7 +6,6 @@
 
 **Собрать и запустить:**
 ```shell
-$ yarn global add parcel-bundler
 $ yarn install
 $ yarn run start
 ```
