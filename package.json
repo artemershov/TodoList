@@ -1,26 +1,35 @@
 {
   "name": "TodoList",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "reactstrap": "^6.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-react-pug": "^6.0.1",
     "babel-preset-env": "^1.7.0",
     "cssnano": "^4.1.5",
-    "pug": "^2.0.3"
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-react": "^7.11.1",
+    "parcel-bundler": "^1.10.3",
+    "prettier": "^1.15.2"
   },
   "scripts": {
-    "start": "parcel dev/index.pug --open",
-    "build": "rm -rf build && parcel build dev/index.pug -d build --no-source-maps",
-    "clean": "rm -rf .cache build dist node_modules yarn* package-lock.json"
+    "start": "npx parcel dev/index.html --open",
+    "build": "rm -rf build && npx parcel build dev/index.html -d build --no-source-maps",
+    "clean": "rm -rf .cache build dist node_modules yarn* package-lock.json",
+    "eslint": "npx eslint dev",
+    "eslint-fix": "npx eslint dev --fix",
+    "prettier": "npx prettier --write dev/{,**}/*"
   },
   "author": "Artem Ershov",
   "license": "ISC"

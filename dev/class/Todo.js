@@ -1,5 +1,4 @@
 export default class Todo {
-
   constructor(title, id = null) {
     this.id = id;
     this.done = false;
@@ -7,5 +6,4 @@ export default class Todo {
     this.addDate = new Date().getTime();
     this.doneDate = null;
   }
-
 }

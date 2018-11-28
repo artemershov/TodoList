@@ -1,5 +1,4 @@
 export default class BrowserStorage {
-
   constructor(name, session = false) {
     this.name = name;
     this.storage = session ? sessionStorage : localStorage;
@@ -29,5 +28,4 @@ export default class BrowserStorage {
   remove() {
     return this.storage.removeItem(this.name);
   }
-
 }

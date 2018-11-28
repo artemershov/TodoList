@@ -3,7 +3,6 @@
   "plugins": [
     "transform-class-properties",
     "transform-object-rest-spread",
-    "transform-react-pug",
     "transform-react-jsx"
   ]
 }
