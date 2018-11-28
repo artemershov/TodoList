@@ -7,5 +7,5 @@
 **Собрать и запустить:**
 ```shell
 $ yarn install
-$ yarn run start
+$ yarn start
 ```
