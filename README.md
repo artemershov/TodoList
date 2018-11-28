@@ -1,5 +1,5 @@
 # TodoList
-`parcel` + `react` + `pug` + `bootstrap`
+`parcel` + `react` + `bootstrap`
 
 **Попробовать:**
 [http://artemershov.ru/apps/todo/](http://artemershov.ru/apps/todo/)
