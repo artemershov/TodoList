@@ -1,21 +1,10 @@
-// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// Classes
 import TodoList from './class/TodoList.js';
 import BrowserStorage from './class/BrowserStorage.js';
-
-// Components
-import TodoListContainer from './components/TodoListContainer.js';
-import AddForm from './components/AddForm.js';
-import RemoveDoneBtn from './components/RemoveDoneBtn.js';
-
-// Bootstrap
-import { Container, Card, CardHeader } from 'reactstrap';
+import AppContainer from './components/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// App class
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -60,21 +49,10 @@ class App extends React.Component {
       this.setState({ todos: this.storage.data });
     }
   };
+
   render = () => (
-    <Container>
-      <h1 className="display-3 text-white text-center my-4">TodoList</h1>
-      <Card className="mb-4">
-        <CardHeader className="px-3">
-          <AddForm submit={this.actions.add} />
-        </CardHeader>
-        <TodoListContainer todos={this.state.todos} actions={this.actions} />
-      </Card>
-      <div className="text-center mb-4">
-        <RemoveDoneBtn actions={this.actions} />
-      </div>
-    </Container>
+    <AppContainer todos={this.state.todos} actions={this.actions} />
   );
 }
 
-// Render
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -20,7 +20,7 @@ export default class EditForm extends React.Component {
     this.props.cancel();
   };
   render = () => (
-    <Form onSubmit={this.submit}>
+    <Form className="px-2" onSubmit={this.submit}>
       <InputGroup>
         <Input
           onChange={this.change}

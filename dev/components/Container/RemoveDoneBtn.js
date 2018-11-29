@@ -6,7 +6,7 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 export default class RemoveDoneBtn extends React.Component {
   removeDone = () => {
     if (confirm('Удалить все завершенные задачи?')) {
-      this.props.actions.removeDone();
+      this.props.remove();
     }
   };
   render = () => (
