@@ -18,12 +18,10 @@
     "sourceType": "module"
   },
   "plugins": [
-    "babel",
     "react"
   ],
   "rules": {
     "strict": 0,
-    "babel/semi": 1,
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
