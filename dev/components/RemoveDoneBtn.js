@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 export default class RemoveDoneBtn extends React.Component {
   removeDone = () => {
@@ -9,7 +11,7 @@ export default class RemoveDoneBtn extends React.Component {
   };
   render = () => (
     <Button outline color="light" onClick={this.removeDone}>
-      <i className="icon-trash-empty" /> Удалить завершенные задачи
+      <FontAwesomeIcon icon={faTrashAlt} /> Удалить завершенные задачи
     </Button>
   );
 }

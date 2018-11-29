@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Input, InputGroup, InputGroupAddon, Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default class EditForm extends React.Component {
   state = {
@@ -29,10 +31,10 @@ export default class EditForm extends React.Component {
         />
         <InputGroupAddon addonType="append">
           <Button outline color="secondary">
-            <i className="icon-ok" />
+            <FontAwesomeIcon icon={faCheck} />
           </Button>
           <Button outline color="secondary" onClick={this.props.cancel}>
-            <i className="icon-cancel" />
+            <FontAwesomeIcon icon={faTimes} />
           </Button>
         </InputGroupAddon>
       </InputGroup>

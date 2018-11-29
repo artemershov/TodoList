@@ -15,9 +15,6 @@ import RemoveDoneBtn from './components/RemoveDoneBtn.js';
 import { Container, Card, CardHeader } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Icons
-import './icons/css/fontello.css';
-
 // App class
 class App extends React.Component {
   constructor(props) {

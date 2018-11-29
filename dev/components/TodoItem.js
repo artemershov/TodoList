@@ -1,5 +1,12 @@
 import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEdit,
+  faTrashAlt,
+  faSquare,
+} from '@fortawesome/free-regular-svg-icons';
 
 const leadZero = num => (num.toString().length == 1 ? '0' + num : num);
 const formatDate = date => {
@@ -29,12 +36,9 @@ export default class TodoItem extends React.Component {
         <tr>
           <td>
             <Button size="sm" color="link" onClick={this.checkDone}>
-              <i
-                className={
-                  this.props.data.done
-                    ? 'icon-ok-squared lead'
-                    : 'icon-check-empty lead'
-                }
+              <FontAwesomeIcon
+                className="lead"
+                icon={this.props.data.done ? faCheckSquare : faSquare}
               />
             </Button>
           </td>
@@ -49,10 +53,10 @@ export default class TodoItem extends React.Component {
           <td>
             <ButtonGroup>
               <Button size="sm" color="light" onClick={this.props.edit}>
-                <i className="icon-edit" />
+                <FontAwesomeIcon icon={faEdit} />
               </Button>
               <Button size="sm" color="light" onClick={this.remove}>
-                <i className="icon-trash-empty" />
+                <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
             </ButtonGroup>
           </td>
