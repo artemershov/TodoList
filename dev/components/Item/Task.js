@@ -2,6 +2,7 @@ import React from 'react';
 import CheckButton from './CheckButton.js';
 import RelativeDate from './RelativeDate.js';
 import ActionsMenu from './ActionsMenu.js';
+import Priority from './Priority.js';
 
 export default class Task extends React.Component {
   checkDone = () => {
@@ -32,6 +33,11 @@ export default class Task extends React.Component {
           />
         </div>
       </div>
+      {!!+this.props.data.priority && (
+        <div className="px-2">
+          <Priority level={this.props.data.priority} />
+        </div>
+      )}
       <div>
         <ActionsMenu
           actions={{

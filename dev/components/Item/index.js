@@ -1,19 +1,21 @@
 import React from 'react';
 import Task from './Task.js';
-import EditForm from './EditForm.js';
+import AddForm from '../Container/AddForm.js';
 
 export default class TodoItem extends React.Component {
   state = {
     formOpen: false,
   };
   formToggle = () => this.setState({ formOpen: !this.state.formOpen });
+  editFormSubmit = data => {
+    this.props.actions.edit(data);
+    this.formToggle();
+  };
   render = () =>
     this.state.formOpen ? (
-      <EditForm
-        data={this.props.data}
-        submit={this.props.actions.edit}
-        cancel={this.formToggle}
-      />
+      <div className="px-2">
+        <AddForm data={this.props.data} submit={this.editFormSubmit} />
+      </div>
     ) : (
       <Task
         data={this.props.data}
