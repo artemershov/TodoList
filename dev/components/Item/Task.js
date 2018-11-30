@@ -7,7 +7,7 @@ import Priority from './Priority.js';
 export default class Task extends React.Component {
   checkDone = () => {
     this.props.data.done = !this.props.data.done;
-    this.props.data.doneDate = new Date().getTime();
+    this.props.data.date.done = new Date().getTime();
     this.props.actions.edit(this.props.data);
   };
   remove = () => {
@@ -27,8 +27,8 @@ export default class Task extends React.Component {
           <RelativeDate
             date={
               this.props.data.done
-                ? this.props.data.doneDate
-                : this.props.data.addDate
+                ? this.props.data.date.done
+                : this.props.data.date.add
             }
           />
         </div>

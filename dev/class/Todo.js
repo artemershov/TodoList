@@ -3,8 +3,10 @@ export default class Todo {
     this.id = id;
     this.done = false;
     this.title = title;
-    this.addDate = new Date().getTime();
-    this.doneDate = null;
+    this.date = {
+      add: new Date().getTime(),
+      done: null,
+    },
     this.priority = priority;
   }
 }
