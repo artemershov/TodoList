@@ -22,15 +22,21 @@ export default class Task extends React.Component {
       </div>
       <div className="flex-fill px-2" style={{ lineHeight: 1.2 }}>
         <div className="font-weight-bold">{this.props.data.title}</div>
-        <div className="text-muted small d-none d-sm-block">
-          {this.props.data.done ? 'Завершено: ' : 'Добавлено: '}
-          <RelativeDate
-            date={
-              this.props.data.done
-                ? this.props.data.date.done
-                : this.props.data.date.add
-            }
-          />
+        <div className="text-muted small">
+          {this.props.data.date.deadline && (
+            <span className="mr-2">
+              Дедлайн: <RelativeDate date={this.props.data.date.deadline} />
+            </span>
+          )}
+          {this.props.data.done ? (
+            <span className="mr-2">
+              Завершено: <RelativeDate date={this.props.data.date.done} />
+            </span>
+          ) : (
+            <span className="mr-2">
+              Добавлено: <RelativeDate date={this.props.data.date.add} />
+            </span>
+          )}
         </div>
       </div>
       {!!+this.props.data.priority && (

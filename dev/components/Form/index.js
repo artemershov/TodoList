@@ -1,37 +1,55 @@
 import React from 'react';
 import { Form, Input, Button } from 'reactstrap';
+import DatePicker from 'DatePicker';
+import { ru } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { priorities } from '../../class/Todo.js';
 
-export default class AddForm extends React.Component {
+export default class TaskForm extends React.Component {
   state = {
     title: '',
     priority: 0,
+    deadline: null,
   };
-  change = e => {
+  handleChange = e => {
     const data = e.target.value;
     const prop = e.target.dataset.prop;
     this.setState({ [prop]: data });
   };
-  submit = e => {
+  handleDatapicker = date => {
+    this.setState({ deadline: date });
+  };
+  handleSubmit = e => {
     e.preventDefault();
     this.props.submit(this.state);
+    this.resetForm();
+  };
+  resetForm = () => {
     this.setState({
       title: '',
       priority: 0,
+      deadline: null,
     });
   };
   componentDidMount = () => {
-    if (this.props.data) this.setState(this.props.data);
+    if (this.props.data) {
+      const { title, priority } = this.props.data;
+      const { deadline } = this.props.data.date;
+      this.setState({
+        title,
+        priority,
+        deadline: deadline ? new Date(deadline) : null,
+      });
+    }
   };
   render = () => (
-    <Form onSubmit={this.submit}>
+    <Form onSubmit={this.handleSubmit}>
       <div className="d-flex">
         <div className="flex-fill">
           <Input
             data-prop="title"
-            onChange={this.change}
+            onChange={this.handleChange}
             value={this.state.title}
             maxLength="200"
             required
@@ -42,7 +60,7 @@ export default class AddForm extends React.Component {
           <Input
             type="select"
             data-prop="priority"
-            onChange={this.change}
+            onChange={this.handleChange}
             value={this.state.priority}>
             {priorities.map((el, idx) => (
               <option key={idx} value={idx}>
@@ -50,6 +68,17 @@ export default class AddForm extends React.Component {
               </option>
             ))}
           </Input>
+        </div>
+        <div className="pr-2">
+          <DatePicker
+            type="element"
+            value={this.state.deadline}
+            onChange={this.handleDatapicker}
+            locale={ru}>
+            <Button outline color="secondary">
+              <FontAwesomeIcon icon={faCalendar} />
+            </Button>
+          </DatePicker>
         </div>
         <div>
           <Button outline color="secondary">

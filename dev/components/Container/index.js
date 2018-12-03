@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoList from '../List';
-import AddForm from './AddForm.js';
+import TaskForm from '../Form';
 import RemoveDoneBtn from './RemoveDoneBtn.js';
 import { Container, Card, CardHeader } from 'reactstrap';
 
@@ -9,7 +9,7 @@ const AppContainer = props => (
     <h1 className="display-3 text-white text-center my-4">TodoList</h1>
     <Card className="mb-4">
       <CardHeader className="px-3">
-        <AddForm submit={props.actions.add} />
+        <TaskForm submit={props.actions.add} />
       </CardHeader>
       <TodoList todos={props.todos} actions={props.actions} />
     </Card>

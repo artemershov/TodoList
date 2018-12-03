@@ -7,8 +7,10 @@
     "@fortawesome/free-regular-svg-icons": "^5.5.0",
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@fortawesome/react-fontawesome": "^0.1.3",
+    "DatePicker": "https://github.com/artemershov/DatePicker.git",
     "bootstrap": "^4.1.3",
     "date-fns": "^2.0.0-alpha.25",
+    "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "reactstrap": "^6.5.0"
