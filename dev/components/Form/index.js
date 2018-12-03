@@ -24,7 +24,12 @@ export default class TaskForm extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.submit(this.state);
+    const { title, priority, deadline } = this.state;
+    this.props.submit({
+      title,
+      priority,
+      deadline: deadline ? deadline.getTime() : null,
+    });
     this.resetForm();
   };
   resetForm = () => {

@@ -1,13 +1,13 @@
 export default class Todo {
-  constructor({ title, priority = 0, deadline = null }, id = null) {
+  constructor({ title, priority = 0, deadline = null }, id) {
     this.id = id;
     this.done = false;
     this.title = title;
     this.date = {
-      add: new Date().getTime(),
+      add: Date.now(),
       done: null,
       deadline: deadline,
-    },
+    };
     this.priority = priority;
   }
 }

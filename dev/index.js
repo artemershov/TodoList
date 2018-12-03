@@ -5,53 +5,56 @@ import BrowserStorage from './class/BrowserStorage.js';
 import AppContainer from './components/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const todos = new TodoList();
+let storage;
+try {
+  storage = new BrowserStorage('TodoList');
+} catch (e) {
+  // localStorage doesn't work on file:// urls
+  storage = null;
+}
+
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.todos = new TodoList();
-    try {
-      this.storage = new BrowserStorage('TodoList');
-    } catch (e) {
-      // localStorage doesn't work on file:// urls
-    }
-    this.state = {
-      todos: [],
-    };
-  }
+  state = { list: [] };
 
   actions = {
     add: data => {
-      const todos = this.todos.add(data);
-      if (this.storage) this.storage.data = todos;
-      this.setState({ todos });
+      todos.add(data);
+      this.updateStorage();
     },
-    edit: data => {
-      this.todos.edit(data);
-      const todos = this.todos.sort();
-      if (this.storage) this.storage.data = todos;
-      this.setState({ todos });
+    edit: (id, data) => {
+      todos.edit(id, data);
+      this.updateStorage();
     },
-    remove: data => {
-      const todos = this.todos.remove(data);
-      if (this.storage) this.storage.data = todos;
-      this.setState({ todos });
+    check: id => {
+      todos.check(id);
+      this.updateStorage();
+    },
+    remove: id => {
+      todos.remove(id);
+      this.updateStorage();
     },
     removeDone: () => {
-      const todos = this.todos.removeDone();
-      if (this.storage) this.storage.data = todos;
-      this.setState({ todos });
+      todos.removeDone();
+      this.updateStorage();
     },
   };
 
+  updateStorage = () => {
+    todos.sort(['date.done', 'date.add', 'done'], true);
+    if (storage) storage.set(todos.getData());
+    this.setState({ list: todos.getList() });
+  };
+
   componentDidMount = () => {
-    if (this.storage && this.storage.data) {
-      this.todos.list = this.storage.data;
-      this.setState({ todos: this.storage.data });
+    if (storage && storage.get()) {
+      todos.setData(storage.get());
+      this.setState({ list: todos.getList() });
     }
   };
 
   render = () => (
-    <AppContainer todos={this.state.todos} actions={this.actions} />
+    <AppContainer todos={this.state.list} actions={this.actions} />
   );
 }
 
