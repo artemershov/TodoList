@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form, Input, Button } from 'reactstrap';
 import DatePicker from 'DatePicker';
-import { ru } from 'date-fns/locale';
+import ru from 'date-fns/locale/ru';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
 import { priorities } from '../../class/Todo.js';
 
 export default class TaskForm extends React.Component {
@@ -76,7 +78,9 @@ export default class TaskForm extends React.Component {
             onChange={this.handleDatapicker}
             locale={ru}>
             <Button outline color="secondary">
-              <FontAwesomeIcon icon={faCalendar} />
+              <FontAwesomeIcon
+                icon={this.state.deadline ? faCalendarCheck : faCalendar}
+              />
             </Button>
           </DatePicker>
         </div>

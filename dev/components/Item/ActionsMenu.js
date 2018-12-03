@@ -6,8 +6,9 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons/faEdit';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons/faTrashAlt';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 
 const ActionsMenu = props => (
   <UncontrolledDropdown size="sm" direction="left">
