@@ -3,8 +3,8 @@ import List from './List.js';
 import Placeholder from './Placeholder.js';
 
 const TodoList = props =>
-  props.todos.length ? (
-    <List todos={props.todos} actions={props.actions} />
+  props.list.length ? (
+    <List list={props.list} actions={props.actions} />
   ) : (
     <Placeholder />
   );

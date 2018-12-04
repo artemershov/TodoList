@@ -5,7 +5,7 @@ import BrowserStorage from './class/BrowserStorage.js';
 import AppContainer from './components/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const todos = new TodoList();
+const Todo = new TodoList();
 let storage;
 try {
   storage = new BrowserStorage('TodoList');
@@ -19,42 +19,42 @@ class App extends React.Component {
 
   actions = {
     add: data => {
-      todos.add(data);
+      Todo.add(data);
       this.updateStorage();
     },
     edit: (id, data) => {
-      todos.edit(id, data);
+      Todo.edit(id, data);
       this.updateStorage();
     },
     check: id => {
-      todos.check(id);
+      Todo.check(id);
       this.updateStorage();
     },
     remove: id => {
-      todos.remove(id);
+      Todo.remove(id);
       this.updateStorage();
     },
     removeDone: () => {
-      todos.removeDone();
+      Todo.removeDone();
       this.updateStorage();
     },
   };
 
   updateStorage = () => {
-    todos.sort(['date.done', 'date.add', 'done'], true);
-    if (storage) storage.set(todos.getData());
-    this.setState({ list: todos.getList() });
+    Todo.sort(['date.done', 'date.add', 'done'], true);
+    if (storage) storage.set(Todo.getData());
+    this.setState({ list: Todo.getList() });
   };
 
   componentDidMount = () => {
     if (storage && storage.get()) {
-      todos.setData(storage.get());
-      this.setState({ list: todos.getList() });
+      Todo.setData(storage.get());
+      this.setState({ list: Todo.getList() });
     }
   };
 
   render = () => (
-    <AppContainer todos={this.state.list} actions={this.actions} />
+    <AppContainer list={this.state.list} actions={this.actions} />
   );
 }
 

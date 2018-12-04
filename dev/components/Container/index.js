@@ -11,7 +11,7 @@ const AppContainer = props => (
       <CardHeader className="px-3">
         <TaskForm submit={props.actions.add} />
       </CardHeader>
-      <TodoList todos={props.todos} actions={props.actions} />
+      <TodoList list={props.list} actions={props.actions} />
     </Card>
     <div className="text-center mb-4">
       <RemoveDoneBtn remove={props.actions.removeDone} />
