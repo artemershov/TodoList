@@ -38,18 +38,54 @@ class App extends React.Component {
       Todo.removeDone();
       this.updateStorage();
     },
+    editDescription: (id, data) => {
+      Todo.editDescription(id, data);
+      this.updateStorage();
+    },
+    comments: {
+      add: (taskId, message) => {
+        Todo.commentAdd(taskId, message);
+        this.updateStorage();
+      },
+      edit: (taskId, id, message) => {
+        Todo.commentEdit(taskId, id, message);
+        this.updateStorage();
+      },
+      remove: (taskId, id) => {
+        Todo.commentRemove(taskId, id);
+        this.updateStorage();
+      },
+    },
+    subtasks: {
+      add: (taskId, title) => {
+        Todo.subtaskAdd(taskId, title);
+        this.updateStorage();
+      },
+      edit: (taskId, id, title) => {
+        Todo.subtaskEdit(taskId, id, title);
+        this.updateStorage();
+      },
+      check: (taskId, id) => {
+        Todo.subtaskCheck(taskId, id);
+        this.updateStorage();
+      },
+      remove: (taskId, id) => {
+        Todo.subtaskRemove(taskId, id);
+        this.updateStorage();
+      },
+    },
   };
 
   updateStorage = () => {
     Todo.sort(['date.done', 'date.add', 'done'], true);
     if (storage) storage.set(Todo.getData());
-    this.setState({ list: Todo.getList() });
+    this.setState({ list: Todo.getOrderedList() });
   };
 
   componentDidMount = () => {
     if (storage && storage.get()) {
       Todo.setData(storage.get());
-      this.setState({ list: Todo.getList() });
+      this.setState({ list: Todo.getOrderedList() });
     }
   };
 

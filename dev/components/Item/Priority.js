@@ -1,10 +1,10 @@
 import React from 'react';
 import { Badge } from 'reactstrap';
-import { priorities } from '../../class/Todo.js';
+import { taskPriorities } from '../../class/Task.js';
 
 const Priority = props => (
-  <Badge color={priorities[props.level].color}>
-    {priorities[props.level].title}
+  <Badge color={taskPriorities[props.level].color}>
+    {taskPriorities[props.level].title}
   </Badge>
 );
 

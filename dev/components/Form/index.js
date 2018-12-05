@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
-import { priorities } from '../../class/Todo.js';
+import { taskPriorities } from '../../class/Task.js';
 
 export default class TaskForm extends React.Component {
   state = {
@@ -69,9 +69,9 @@ export default class TaskForm extends React.Component {
             data-prop="priority"
             onChange={this.handleChange}
             value={this.state.priority}>
-            {priorities.map((el, idx) => (
-              <option key={idx} value={idx}>
-                {el.title}
+            {taskPriorities.levels.map(i => (
+              <option key={i} value={i}>
+                {taskPriorities[i].title}
               </option>
             ))}
           </Input>

@@ -1,50 +1,21 @@
-import Todo from './Todo.js';
-import { compact, filter, max, merge, pullAll, sortBy } from 'lodash';
+import Task, { SimpleTask, History, Comment } from './Task.js';
+import { ExtendedList, listAdd, listRemove } from './List.js';
+import { compact, filter, merge, pullAll, sortBy } from 'lodash';
 
-export default class TodoList {
+export default class TodoList extends ExtendedList {
   constructor() {
-    this.list = {};
-    this.order = [];
-  }
-
-  getList() {
-    return this.order.map(i => i && this.list[i]);
-  }
-
-  getOrder() {
-    return this.order;
-  }
-
-  getData() {
-    return {
-      list: this.list,
-      order: this.order,
-    };
-  }
-
-  setList(data) {
-    this.list = data;
-  }
-
-  setOrder(data) {
-    this.order = data;
-  }
-
-  setData(data) {
-    this.list = data.list;
-    this.order = data.order;
+    super();
   }
 
   add(data) {
-    const id = this.order.length ? max(this.order) + 1 : 1;
-    const task = new Todo(data, id);
-    this.list[id] = task;
-    this.order.unshift(id);
-    return task;
+    const task = new Task(this.lastId + 1, data);
+    return super.add(task);
   }
 
   edit(id, data) {
-    return merge(this.list[id], {
+    const task = this.list[id];
+    listAdd(task.history, new History(task.history.lastId + 1, 1));
+    return merge(task, {
       title: data.title,
       priority: data.priority,
       date: {
@@ -55,18 +26,13 @@ export default class TodoList {
 
   check(id) {
     const task = this.list[id];
+    listAdd(task.history, new History(task.history.lastId + 1, task.done ? 3 : 2));
     return merge(task, {
       done: !task.done,
       date: {
         done: task.done ? null : Date.now(),
       },
     });
-  }
-
-  remove(id) {
-    this.list[id] = undefined;
-    pullAll(this.order, [id]);
-    return 1;
   }
 
   removeDone() {
@@ -80,5 +46,57 @@ export default class TodoList {
     this.order = compact(sortBy(this.list, key).map(i => i && i.id));
     if (reverse) this.order.reverse();
     return this.order;
+  }
+
+  editDescription(id, data) {
+    const task = this.list[id];
+    task.description = data;
+    listAdd(task.history, new History(task.history.lastId + 1, 10));
+    return true;
+  }
+
+  commentAdd(taskId, message) {
+    const task = this.list[taskId];
+    return listAdd(task.comments, new Comment(task.comments.lastId + 1, message));
+  }
+
+  commentEdit(taskId, id, message) {
+    const task = this.list[taskId];
+    task.comments.list[id].message = message;
+    return true;
+  }
+
+  commentRemove(taskId, id) {
+    const task = this.list[taskId];
+    return listRemove(task.comments, id);
+  }
+
+  subtaskAdd(taskId, title) {
+    const task = this.list[taskId];
+    listAdd(task.history, new History(task.history.lastId + 1, 5));
+    return listAdd(task.subtasks, new SimpleTask(task.subtasks.lastId + 1, title));
+  }
+
+  subtaskEdit(taskId, id, title) {
+    const task = this.list[taskId];
+    listAdd(task.history, new History(task.history.lastId + 1, 6));
+    task.subtasks.list[id].title = title;
+    return true;
+  }
+
+  subtaskCheck(taskId, id) {
+    const task = this.list[taskId];
+    task.subtasks.list[id].done = !task.subtasks.list[id].done;
+    listAdd(
+      task.history,
+      new History(task.history.lastId + 1, task.subtasks.list[id].done ? 7 : 8)
+    );
+    return true;
+  }
+
+  subtaskRemove(taskId, id) {
+    const task = this.list[taskId];
+    listAdd(task.history, new History(task.history.lastId + 1, 9));
+    return listRemove(task.subtasks, id);
   }
 }
