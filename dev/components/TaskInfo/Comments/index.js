@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SimpleForm from '../../shared/SimpleForm';
 import Comment from './Comment';
 import CommentPlaceholder from './CommentPlaceholder';
@@ -16,7 +16,7 @@ export default class Comments extends React.Component {
   };
 
   render = () => (
-    <div>
+    <Fragment>
       <div className="mb-3">
         <SimpleForm submit={this.handleSubmit} />
       </div>
@@ -31,6 +31,6 @@ export default class Comments extends React.Component {
       ) : (
         <CommentPlaceholder />
       )}
-    </div>
+    </Fragment>
   );
 }

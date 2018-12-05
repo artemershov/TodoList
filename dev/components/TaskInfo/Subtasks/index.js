@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SimpleForm from '../../shared/SimpleForm';
 import SubtaskList from './SubtaskList';
 import SubtaskPlaceholder from './SubtaskPlaceholder';
@@ -9,7 +9,7 @@ export default class SubTasks extends React.Component {
   };
 
   render = () => (
-    <div>
+    <Fragment>
       <div className="mb-3">
         <SimpleForm submit={this.handleSubmit} />
       </div>
@@ -22,6 +22,6 @@ export default class SubTasks extends React.Component {
       ) : (
         <SubtaskPlaceholder />
       )}
-    </div>
+    </Fragment>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import DescriptionForm from './DescriptionForm';
 import DescriptionText from './DescriptionText';
 import DescriptionPlaceholder from './DescriptionPlaceholder';
@@ -19,7 +19,7 @@ export default class Description extends React.Component {
   };
 
   render = () => (
-    <div>
+    <Fragment>
       {this.state.formOpen ? (
         <DescriptionForm value={this.props.data} submit={this.handleSubmit} />
       ) : this.props.data ? (
@@ -27,6 +27,6 @@ export default class Description extends React.Component {
       ) : (
         <DescriptionPlaceholder action={this.formToggle} />
       )}
-    </div>
+    </Fragment>
   );
 }

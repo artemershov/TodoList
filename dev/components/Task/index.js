@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Task from './Task';
 import TaskForm from '../TaskForm';
 import TaskInfo from '../TaskInfo';
@@ -28,7 +28,7 @@ export default class TaskContainer extends React.Component {
   };
 
   render = () => (
-    <div>
+    <Fragment>
       {this.state.formOpen ? (
         <div className="px-2">
           <TaskForm data={this.props.data} submit={this.formSubmit} />
@@ -54,6 +54,6 @@ export default class TaskContainer extends React.Component {
           }}
         />
       </Collapse>
-    </div>
+    </Fragment>
   );
 }

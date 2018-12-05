@@ -5,6 +5,7 @@ import TaskDate from './TaskDate';
 import TaskPriority from './TaskPriority';
 
 const style = {
+  lineHeight: 1.2,
   cursor: 'pointer',
 };
 
@@ -13,13 +14,8 @@ const Task = props => (
     <div>
       <CheckButton onClick={props.actions.check} done={props.data.done} />
     </div>
-    <div className="flex-fill px-2" style={{ lineHeight: 1.2 }}>
-      <div
-        className="font-weight-bold"
-        onClick={props.actions.info}
-        style={style}>
-        {props.data.title}
-      </div>
+    <div className="flex-fill px-2" onClick={props.actions.info} style={style}>
+      <div className="font-weight-bold">{props.data.title}</div>
       <TaskDate date={props.data.date} done={props.data.done} />
     </div>
     {Boolean(Number(props.data.priority)) && (

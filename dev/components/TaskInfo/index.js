@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Description from './Description';
 import Subtasks from './Subtasks';
 import Comments from './Comments';
@@ -19,7 +19,7 @@ export default class TaskInfo extends React.Component {
   };
 
   render = () => (
-    <div>
+    <Fragment>
       <hr />
       <Nav className="mx-2 mb-3" tabs>
         <NavItem>
@@ -85,6 +85,6 @@ export default class TaskInfo extends React.Component {
           <History data={this.props.data.history} />
         </TabPane>
       </TabContent>
-    </div>
+    </Fragment>
   );
 }
