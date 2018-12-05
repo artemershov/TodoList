@@ -1,8 +1,8 @@
 import React from 'react';
-import CheckButton from '../shared/CheckButton.js';
-import ActionsMenu from '../shared/ActionsMenu.js';
-import TaskDate from './TaskDate.js';
-import TaskPriority from './TaskPriority.js';
+import CheckButton from '../shared/CheckButton';
+import ActionsMenu from '../shared/ActionsMenu';
+import TaskDate from './TaskDate';
+import TaskPriority from './TaskPriority';
 
 const style = {
   cursor: 'pointer',

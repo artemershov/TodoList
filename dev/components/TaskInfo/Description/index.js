@@ -1,7 +1,7 @@
 import React from 'react';
-import DescriptionForm from './DescriptionForm.js';
-import DescriptionText from './DescriptionText.js';
-import DescriptionPlaceholder from './DescriptionPlaceholder.js';
+import DescriptionForm from './DescriptionForm';
+import DescriptionText from './DescriptionText';
+import DescriptionPlaceholder from './DescriptionPlaceholder';
 
 export default class Description extends React.Component {
   state = { formOpen: false };

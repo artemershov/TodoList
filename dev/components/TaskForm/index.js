@@ -1,6 +1,6 @@
 import React from 'react';
-import TaskFormDate from './TaskFormDate.js';
-import TaskFormPriorities from './TaskFormPriorities.js';
+import TaskFormDate from './TaskFormDate';
+import TaskFormPriorities from './TaskFormPriorities';
 import { Form, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';

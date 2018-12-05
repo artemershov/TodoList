@@ -1,6 +1,6 @@
 import React from 'react';
-import CheckButton from '../../shared/CheckButton.js';
-import ActionsMenu from '../../shared/ActionsMenu.js';
+import CheckButton from '../../shared/CheckButton';
+import ActionsMenu from '../../shared/ActionsMenu';
 
 export default class SubtaskItem extends React.Component {
   taskCheck = e => {

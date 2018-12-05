@@ -1,5 +1,5 @@
 import React from 'react';
-import Task from './Task.js';
+import Task from './Task';
 import TaskForm from '../TaskForm';
 import TaskInfo from '../TaskInfo';
 import { Collapse } from 'reactstrap';

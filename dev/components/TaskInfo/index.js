@@ -2,7 +2,7 @@ import React from 'react';
 import Description from './Description';
 import Subtasks from './Subtasks';
 import Comments from './Comments';
-import History from './History.js';
+import History from './History';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 const style = {

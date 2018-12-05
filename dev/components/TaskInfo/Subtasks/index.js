@@ -1,7 +1,7 @@
 import React from 'react';
-import SimpleForm from '../../shared/SimpleForm.js';
-import SubtaskList from './SubtaskList.js';
-import SubtaskPlaceholder from './SubtaskPlaceholder.js';
+import SimpleForm from '../../shared/SimpleForm';
+import SubtaskList from './SubtaskList';
+import SubtaskPlaceholder from './SubtaskPlaceholder';
 
 export default class SubTasks extends React.Component {
   handleSubmit = value => {

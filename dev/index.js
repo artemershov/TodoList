@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './class/TodoList.js';
-import BrowserStorage from './class/BrowserStorage.js';
+import TodoList from './class/TodoList';
+import BrowserStorage from './class/BrowserStorage';
 import AppContainer from './components/AppContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import SimpleForm from '../../shared/SimpleForm.js';
-import Comment from './Comment.js';
-import CommentPlaceholder from './CommentPlaceholder.js';
+import SimpleForm from '../../shared/SimpleForm';
+import Comment from './Comment';
+import CommentPlaceholder from './CommentPlaceholder';
 
 export default class Comments extends React.Component {
   handleSubmit = value => {

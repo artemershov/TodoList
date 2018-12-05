@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge } from 'reactstrap';
-import { taskPriorities } from '../../class/Task.js';
+import { taskPriorities } from '../../class/Task';
 
 const TaskPriority = props => (
   <Badge color={taskPriorities[props.level].color}>

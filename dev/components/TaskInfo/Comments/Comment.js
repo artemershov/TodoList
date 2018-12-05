@@ -1,5 +1,6 @@
 import React from 'react';
-import RelativeDate from '../../shared/RelativeDate.js';
+import FormattedDate from '../../shared/FormattedDate';
+import FormattedText from '../../shared/FormattedText';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
@@ -8,9 +9,9 @@ const Comment = props => (
   <div className="px-3 py-2 mb-3 border rounded bg-light">
     <div className="d-flex align-items-center">
       <div className="flex-fill">
-        <div>{props.data.message}</div>
+        <FormattedText text={props.data.message} />
         <div className="text-muted small">
-          <RelativeDate date={props.data.date} />
+          <FormattedDate date={props.data.date} />
         </div>
       </div>
       <div>

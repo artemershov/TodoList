@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, ListGroup, ListGroupItem } from 'reactstrap';
-import SubtaskContainer from './SubtaskContainer.js';
+import SubtaskContainer from './SubtaskContainer';
 
 const SubtaskList = props => (
   <Card className="mb-2">

@@ -1,5 +1,5 @@
-import Task, { SimpleTask, History, Comment } from './Task.js';
-import { ExtendedList, listAdd, listRemove } from './List.js';
+import Task, { SimpleTask, History, Comment } from './Task';
+import { ExtendedList, listAdd, listRemove } from './List';
 import { compact, filter, merge, pullAll, sortBy } from 'lodash';
 
 export default class TodoList extends ExtendedList {

@@ -1,6 +1,6 @@
 import React from 'react';
-import SimpleForm from '../../shared/SimpleForm.js';
-import SubtaskItem from './SubtaskItem.js';
+import SimpleForm from '../../shared/SimpleForm';
+import SubtaskItem from './SubtaskItem';
 
 export default class SubtaskList extends React.Component {
   state = { formOpen: false };

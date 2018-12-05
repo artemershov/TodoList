@@ -1,4 +1,4 @@
-import { SimpleList, listAdd } from './List.js';
+import { SimpleList, listAdd } from './List';
 
 class SimpleTask {
   constructor(id, title) {

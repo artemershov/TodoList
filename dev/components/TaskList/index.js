@@ -1,6 +1,6 @@
 import React from 'react';
-import TaskList from './TaskList.js';
-import TaskListPlaceholder from './TaskListPlaceholder.js';
+import TaskList from './TaskList';
+import TaskListPlaceholder from './TaskListPlaceholder';
 
 const TaskListContainer = props =>
   props.list.length ? (
