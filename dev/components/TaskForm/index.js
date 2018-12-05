@@ -1,12 +1,9 @@
 import React from 'react';
+import TaskFormDate from './TaskFormDate.js';
+import TaskFormPriorities from './TaskFormPriorities.js';
 import { Form, Input, Button } from 'reactstrap';
-import DatePicker from 'DatePicker';
-import ru from 'date-fns/locale/ru';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
-import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
-import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
-import { taskPriorities } from '../../class/Task.js';
 
 export default class TaskForm extends React.Component {
   state = {
@@ -64,30 +61,16 @@ export default class TaskForm extends React.Component {
           />
         </div>
         <div className="px-2">
-          <Input
-            type="select"
-            data-prop="priority"
+          <TaskFormPriorities
+            value={this.state.priority}
             onChange={this.handleChange}
-            value={this.state.priority}>
-            {taskPriorities.levels.map(i => (
-              <option key={i} value={i}>
-                {taskPriorities[i].title}
-              </option>
-            ))}
-          </Input>
+          />
         </div>
         <div className="pr-2">
-          <DatePicker
-            type="element"
-            value={this.state.deadline}
+          <TaskFormDate
+            date={this.state.deadline}
             onChange={this.handleDatapicker}
-            locale={ru}>
-            <Button outline color="secondary">
-              <FontAwesomeIcon
-                icon={this.state.deadline ? faCalendarCheck : faCalendar}
-              />
-            </Button>
-          </DatePicker>
+          />
         </div>
         <div>
           <Button outline color="secondary">

@@ -31,6 +31,7 @@ export default class SimpleForm extends React.Component {
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
+            maxLength="200"
             required
           />
         </div>

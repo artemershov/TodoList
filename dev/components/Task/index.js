@@ -1,10 +1,10 @@
 import React from 'react';
 import Task from './Task.js';
-import TaskForm from '../Form';
-import Info from '../Info';
+import TaskForm from '../TaskForm';
+import TaskInfo from '../TaskInfo';
 import { Collapse } from 'reactstrap';
 
-export default class TodoItem extends React.Component {
+export default class TaskContainer extends React.Component {
   state = {
     infoOpen: false,
     formOpen: false,
@@ -45,7 +45,7 @@ export default class TodoItem extends React.Component {
         />
       )}
       <Collapse isOpen={this.state.infoOpen}>
-        <Info
+        <TaskInfo
           data={this.props.data}
           actions={{
             description: this.props.actions.editDescription,

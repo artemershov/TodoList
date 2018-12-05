@@ -26,7 +26,10 @@ export default class TodoList extends ExtendedList {
 
   check(id) {
     const task = this.list[id];
-    listAdd(task.history, new History(task.history.lastId + 1, task.done ? 3 : 2));
+    listAdd(
+      task.history,
+      new History(task.history.lastId + 1, task.done ? 3 : 2)
+    );
     return merge(task, {
       done: !task.done,
       date: {
@@ -57,7 +60,10 @@ export default class TodoList extends ExtendedList {
 
   commentAdd(taskId, message) {
     const task = this.list[taskId];
-    return listAdd(task.comments, new Comment(task.comments.lastId + 1, message));
+    return listAdd(
+      task.comments,
+      new Comment(task.comments.lastId + 1, message)
+    );
   }
 
   commentEdit(taskId, id, message) {
@@ -74,7 +80,10 @@ export default class TodoList extends ExtendedList {
   subtaskAdd(taskId, title) {
     const task = this.list[taskId];
     listAdd(task.history, new History(task.history.lastId + 1, 5));
-    return listAdd(task.subtasks, new SimpleTask(task.subtasks.lastId + 1, title));
+    return listAdd(
+      task.subtasks,
+      new SimpleTask(task.subtasks.lastId + 1, title)
+    );
   }
 
   subtaskEdit(taskId, id, title) {

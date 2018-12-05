@@ -21,7 +21,7 @@ export default class Task extends SimpleTask {
     this.subtasks = new SimpleList();
     this.comments = new SimpleList();
     this.history = new SimpleList();
-    listAdd(this.history, new History(this.history.lastId, 0));
+    listAdd(this.history, new History(this.history.lastId + 1, 0));
   }
 }
 

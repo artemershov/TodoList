@@ -7,9 +7,10 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 const style = {
   cursor: 'pointer',
+  userSelect: 'none',
 };
 
-export default class Info extends React.Component {
+export default class TaskInfo extends React.Component {
   state = { activeTab: '0' };
 
   toggle = e => {

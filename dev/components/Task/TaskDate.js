@@ -10,9 +10,7 @@ const TaskDate = props => (
     )}
     <span className="mr-2">
       {props.done ? 'Завершено: ' : 'Добавлено: '}
-      <RelativeDate
-        date={props.done ? props.date.done : props.date.add}
-      />
+      <RelativeDate date={props.done ? props.date.done : props.date.add} />
     </span>
   </div>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList.js';
 import BrowserStorage from './class/BrowserStorage.js';
-import AppContainer from './components/Container';
+import AppContainer from './components/AppContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Todo = new TodoList();
@@ -89,9 +89,7 @@ class App extends React.Component {
     }
   };
 
-  render = () => (
-    <AppContainer list={this.state.list} actions={this.actions} />
-  );
+  render = () => <AppContainer list={this.state.list} actions={this.actions} />;
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));

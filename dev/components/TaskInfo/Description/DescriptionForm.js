@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Input, Button, Row, Col } from 'reactstrap';
 
 export default class DescriptionForm extends React.Component {
   state = { value: '' };
@@ -28,12 +28,22 @@ export default class DescriptionForm extends React.Component {
           type="textarea"
           value={this.state.value}
           onChange={this.handleChange}
+          maxLength="2000"
         />
       </FormGroup>
       <FormGroup>
-        <Button outline color="secondary">
-          Сохранить
-        </Button>
+        <Row>
+          <Col>
+            <Button outline color="secondary">
+              Сохранить
+            </Button>
+          </Col>
+          <Col>
+            <div className="text-right text-muted small">
+              {this.state.value.length} / 2000 символов
+            </div>
+          </Col>
+        </Row>
       </FormGroup>
     </Form>
   );

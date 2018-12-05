@@ -2,7 +2,7 @@ import React from 'react';
 import CheckButton from '../shared/CheckButton.js';
 import ActionsMenu from '../shared/ActionsMenu.js';
 import TaskDate from './TaskDate.js';
-import Priority from './Priority.js';
+import TaskPriority from './TaskPriority.js';
 
 const style = {
   cursor: 'pointer',
@@ -24,7 +24,7 @@ const Task = props => (
     </div>
     {Boolean(Number(props.data.priority)) && (
       <div className="px-2">
-        <Priority level={props.data.priority} />
+        <TaskPriority level={props.data.priority} />
       </div>
     )}
     <div>

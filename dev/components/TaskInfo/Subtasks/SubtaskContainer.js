@@ -16,10 +16,7 @@ export default class SubtaskList extends React.Component {
 
   render = () =>
     this.state.formOpen ? (
-      <SimpleForm
-        submit={this.handleSubmit}
-        value={this.props.data.title}
-      />
+      <SimpleForm submit={this.handleSubmit} value={this.props.data.title} />
     ) : (
       <SubtaskItem
         id={this.props.id}
