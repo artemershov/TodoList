@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CheckButton from '../shared/CheckButton';
 import ActionsMenu from '../shared/ActionsMenu';
 import TaskDate from './TaskDate';
+import TaskInfoStatus from './TaskInfoStatus';
 import TaskPriority from './TaskPriority';
 import WordBreaker from '../shared/WordBreaker';
 
@@ -20,6 +21,7 @@ const Task = props => (
       <WordBreaker className="font-weight-bold">{props.data.title}</WordBreaker>
       <TaskDate date={props.data.date} done={props.data.done} />
     </Title>
+    <TaskInfoStatus data={props.data} />
     {Boolean(Number(props.data.priority)) && (
       <div className="px-2">
         <TaskPriority level={props.data.priority} />

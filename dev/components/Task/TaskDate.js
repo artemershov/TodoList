@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import FormattedDate from '../shared/FormattedDate';
 
 const TaskDate = props => (
   <div className="text-muted small">
-    {props.date.deadline && (
-      <span className="mr-2">
+    {props.done ? (
+      <Fragment>
+        Завершено: <FormattedDate date={props.date.done} />
+      </Fragment>
+    ) : props.date.deadline ? (
+      <Fragment>
         Дедлайн: <FormattedDate date={props.date.deadline} />
-      </span>
+      </Fragment>
+    ) : (
+      <Fragment>
+        Добавлено: <FormattedDate date={props.date.add} />
+      </Fragment>
     )}
-    <span className="mr-2">
-      {props.done ? 'Завершено: ' : 'Добавлено: '}
-      <FormattedDate date={props.done ? props.date.done : props.date.add} />
-    </span>
   </div>
 );
 
