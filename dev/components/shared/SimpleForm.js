@@ -8,8 +8,12 @@ export default class SimpleForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.submit(this.state.value);
-    this.setState({ value: '' });
+    let value = this.state.value.trim();
+    if (value) {
+      this.props.submit(value);
+      value = '';
+    }
+    this.setState({ value });
   };
 
   handleChange = e => {
