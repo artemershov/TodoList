@@ -13,7 +13,8 @@
     "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^6.5.0",
+    "styled-components": "^4.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

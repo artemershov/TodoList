@@ -1,6 +1,7 @@
 import React from 'react';
 import CheckButton from '../../shared/CheckButton';
 import ActionsMenu from '../../shared/ActionsMenu';
+import WordBreaker from '../../shared/WordBreaker';
 
 export default class SubtaskItem extends React.Component {
   taskCheck = e => {
@@ -24,7 +25,9 @@ export default class SubtaskItem extends React.Component {
           id={this.props.data.id}
         />
       </div>
-      <div className="flex-fill">{this.props.data.title}</div>
+      <WordBreaker className="px-2 flex-fill">
+        {this.props.data.title}
+      </WordBreaker>
       <div>
         <ActionsMenu
           actions={{
