@@ -4,11 +4,12 @@ import Subtasks from './Subtasks';
 import Comments from './Comments';
 import History from './History';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import styled from 'styled-components';
 
-const style = {
-  cursor: 'pointer',
-  userSelect: 'none',
-};
+const Pointer = styled.div`
+  cursor: pointer;
+  user-select: none;
+`;
 
 export default class TaskInfo extends React.Component {
   state = { activeTab: '0' };
@@ -23,40 +24,44 @@ export default class TaskInfo extends React.Component {
       <hr />
       <Nav className="mx-2 mb-3" tabs>
         <NavItem>
-          <NavLink
-            className={this.state.activeTab == 0 ? 'active' : ''}
-            onClick={this.toggle}
-            data-tab="0"
-            style={style}>
-            Описание
-          </NavLink>
+          <Pointer>
+            <NavLink
+              className={this.state.activeTab == 0 ? 'active' : ''}
+              onClick={this.toggle}
+              data-tab="0">
+              Описание
+            </NavLink>
+          </Pointer>
         </NavItem>
         <NavItem>
-          <NavLink
-            className={this.state.activeTab == 1 ? 'active' : ''}
-            onClick={this.toggle}
-            data-tab="1"
-            style={style}>
-            Подзадачи
-          </NavLink>
+          <Pointer>
+            <NavLink
+              className={this.state.activeTab == 1 ? 'active' : ''}
+              onClick={this.toggle}
+              data-tab="1">
+              Подзадачи
+            </NavLink>
+          </Pointer>
         </NavItem>
         <NavItem>
-          <NavLink
-            className={this.state.activeTab == 2 ? 'active' : ''}
-            onClick={this.toggle}
-            data-tab="2"
-            style={style}>
-            Комментарии
-          </NavLink>
+          <Pointer>
+            <NavLink
+              className={this.state.activeTab == 2 ? 'active' : ''}
+              onClick={this.toggle}
+              data-tab="2">
+              Комментарии
+            </NavLink>
+          </Pointer>
         </NavItem>
         <NavItem>
-          <NavLink
-            className={this.state.activeTab == 3 ? 'active' : ''}
-            onClick={this.toggle}
-            data-tab="3"
-            style={style}>
-            История
-          </NavLink>
+          <Pointer>
+            <NavLink
+              className={this.state.activeTab == 3 ? 'active' : ''}
+              onClick={this.toggle}
+              data-tab="3">
+              История
+            </NavLink>
+          </Pointer>
         </NavItem>
       </Nav>
       <TabContent className="px-2" activeTab={this.state.activeTab}>
