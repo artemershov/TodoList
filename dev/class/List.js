@@ -1,4 +1,4 @@
-import { pull } from 'lodash';
+import { compact, pull, sortBy } from 'lodash';
 
 class SimpleList {
   constructor() {
@@ -56,12 +56,17 @@ export default class ExtendedList extends SimpleList {
   }
 
   add(data) {
-    listAdd(this, data);
+    return listAdd(this, data);
   }
 
   remove(id) {
-    listRemove(this, id);
+    return listRemove(this, id);
   }
+
+  sort(key, reverse = false) {
+    return listSort(this, key, reverse);
+  }
+
 }
 
 const listAdd = (list, data) => {
@@ -77,4 +82,10 @@ const listRemove = (list, id) => {
   return 1;
 };
 
-export { SimpleList, ExtendedList, listAdd, listRemove };
+const listSort = (list, key, reverse = false) => {
+  list.order = compact(sortBy(list.list, key).map(i => i && i.id));
+  if (reverse) list.order.reverse();
+  return list.order;
+};
+
+export { SimpleList, ExtendedList, listAdd, listRemove, listSort };

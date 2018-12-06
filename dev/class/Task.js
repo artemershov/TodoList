@@ -5,18 +5,18 @@ class SimpleTask {
     this.id = id;
     this.done = false;
     this.title = title;
+    this.date = {
+      add: Date.now(),
+      done: null,
+    };
   }
 }
 
 export default class Task extends SimpleTask {
   constructor(id, { title, priority = 0, deadline = null }) {
     super(id, title);
-    this.date = {
-      add: Date.now(),
-      done: null,
-      deadline: deadline,
-    };
     this.priority = priority;
+    this.date.deadline = deadline;
     this.description = null;
     this.subtasks = new SimpleList();
     this.comments = new SimpleList();

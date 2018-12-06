@@ -1,6 +1,6 @@
 import Task, { SimpleTask, History, Comment } from './Task';
-import { ExtendedList, listAdd, listRemove } from './List';
-import { compact, filter, merge, pullAll, sortBy } from 'lodash';
+import { ExtendedList, listAdd, listRemove, listSort } from './List';
+import { filter, merge, pullAll } from 'lodash';
 
 export default class TodoList extends ExtendedList {
   constructor() {
@@ -45,12 +45,6 @@ export default class TodoList extends ExtendedList {
     return ids.length;
   }
 
-  sort(key, reverse = false) {
-    this.order = compact(sortBy(this.list, key).map(i => i && i.id));
-    if (reverse) this.order.reverse();
-    return this.order;
-  }
-
   editDescription(id, data) {
     const task = this.list[id];
     task.description = data;
@@ -80,10 +74,12 @@ export default class TodoList extends ExtendedList {
   subtaskAdd(taskId, title) {
     const task = this.list[taskId];
     listAdd(task.history, new History(task.history.lastId + 1, 5));
-    return listAdd(
+    const id = listAdd(
       task.subtasks,
       new SimpleTask(task.subtasks.lastId + 1, title)
     );
+    listSort(task.subtasks, ['date.done', 'date.add', 'done'], true);
+    return id;
   }
 
   subtaskEdit(taskId, id, title) {
@@ -95,11 +91,18 @@ export default class TodoList extends ExtendedList {
 
   subtaskCheck(taskId, id) {
     const task = this.list[taskId];
-    task.subtasks.list[id].done = !task.subtasks.list[id].done;
+    const subtask = task.subtasks.list[id];
+    merge(subtask, {
+      done: !subtask.done,
+      date: {
+        done: subtask.done ? null : Date.now(),
+      },
+    });
     listAdd(
       task.history,
-      new History(task.history.lastId + 1, task.subtasks.list[id].done ? 7 : 8)
+      new History(task.history.lastId + 1, subtask.done ? 7 : 8)
     );
+    listSort(task.subtasks, ['date.done', 'date.add', 'done'], true);
     return true;
   }
 
