@@ -33,6 +33,7 @@ export default class SimpleForm extends React.Component {
             onChange={this.handleChange}
             maxLength="200"
             required
+            placeholder={this.props.placeholder}
           />
         </div>
         <div>

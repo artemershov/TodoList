@@ -18,7 +18,10 @@ export default class Comments extends React.Component {
   render = () => (
     <Fragment>
       <div className="mb-3">
-        <SimpleForm submit={this.handleSubmit} />
+        <SimpleForm
+          submit={this.handleSubmit}
+          placeholder="Текст комментария"
+        />
       </div>
       {this.props.data.order.length ? (
         this.props.data.order.map(i => (

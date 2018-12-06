@@ -11,7 +11,7 @@ export default class SubTasks extends React.Component {
   render = () => (
     <Fragment>
       <div className="mb-3">
-        <SimpleForm submit={this.handleSubmit} />
+        <SimpleForm submit={this.handleSubmit} placeholder="Название задачи" />
       </div>
       {this.props.data.order.length ? (
         <SubtaskList
