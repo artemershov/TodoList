@@ -66,7 +66,6 @@ export default class ExtendedList extends SimpleList {
   sort(key, reverse = false) {
     return listSort(this, key, reverse);
   }
-
 }
 
 const listAdd = (list, data) => {
