@@ -17,10 +17,10 @@ const ActionsMenu = props => (
     </DropdownToggle>
     <DropdownMenu>
       <DropdownItem onClick={props.actions.edit} data-id={props.id}>
-        <FontAwesomeIcon icon={faEdit} /> Редактировать
+        <FontAwesomeIcon icon={faEdit} fixedWidth /> Редактировать
       </DropdownItem>
       <DropdownItem onClick={props.actions.remove} data-id={props.id}>
-        <FontAwesomeIcon icon={faTrashAlt} /> Удалить
+        <FontAwesomeIcon icon={faTrashAlt} fixedWidth /> Удалить
       </DropdownItem>
     </DropdownMenu>
   </UncontrolledDropdown>

@@ -13,7 +13,10 @@ const TaskFormDate = props => (
     onChange={props.onChange}
     locale={ru}>
     <Button outline color="secondary">
-      <FontAwesomeIcon icon={props.date ? faCalendarCheck : faCalendar} />
+      <FontAwesomeIcon
+        icon={props.date ? faCalendarCheck : faCalendar}
+        fixedWidth
+      />
     </Button>
   </DatePicker>
 );

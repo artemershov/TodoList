@@ -79,7 +79,7 @@ export default class TaskForm extends React.Component {
         </div>
         <div>
           <Button outline color="secondary">
-            <FontAwesomeIcon icon={faCheck} />
+            <FontAwesomeIcon icon={faCheck} fixedWidth />
           </Button>
         </div>
       </div>
