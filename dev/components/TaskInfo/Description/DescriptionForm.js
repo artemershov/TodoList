@@ -31,6 +31,7 @@ export default class DescriptionForm extends React.Component {
       <FormGroup>
         <Input
           type="textarea"
+          rows="5"
           value={this.state.value}
           onChange={this.handleChange}
           maxLength="2000"
