@@ -1,6 +1,8 @@
 import Task, { SimpleTask, History, Comment } from './Task';
 import { ExtendedList, listAdd, listRemove, listSort } from './List';
-import { filter, merge, pullAll } from 'lodash';
+import filter from 'lodash/filter';
+import merge from 'lodash/merge';
+import pullAll from 'lodash/pullAll';
 
 export default class TodoList extends ExtendedList {
   constructor() {

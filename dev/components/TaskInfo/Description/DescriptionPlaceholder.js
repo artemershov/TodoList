@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import Button from 'reactstrap/lib/Button';
 
 const DescriptionPlaceholder = props => (
   <div className="py-3 text-center">

@@ -1,6 +1,7 @@
 import React from 'react';
 import TaskContainer from '../Task';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import ListGroup from 'reactstrap/lib/ListGroup';
+import ListGroupItem from 'reactstrap/lib/ListGroupItem';
 
 const TaskList = props => (
   <ListGroup flush>

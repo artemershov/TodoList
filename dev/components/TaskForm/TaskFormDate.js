@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import Button from 'reactstrap/lib/Button';
 import DatePicker from 'DatePicker';
 import ru from 'date-fns/locale/ru';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

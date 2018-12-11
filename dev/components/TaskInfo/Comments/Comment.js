@@ -2,7 +2,7 @@ import React from 'react';
 import FormattedDate from '../../shared/FormattedDate';
 import FormattedText from '../../shared/FormattedText';
 import WordBreaker from '../../shared/WordBreaker';
-import { Button } from 'reactstrap';
+import Button from 'reactstrap/lib/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 

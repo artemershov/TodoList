@@ -1,4 +1,4 @@
-import { formatRelative } from 'date-fns';
+import formatRelative from 'date-fns/formatRelative';
 import ru from 'date-fns/locale/ru';
 
 const FormattedDate = props =>

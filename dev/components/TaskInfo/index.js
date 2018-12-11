@@ -3,7 +3,11 @@ import Description from './Description';
 import Subtasks from './Subtasks';
 import Comments from './Comments';
 import History from './History';
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import TabContent from 'reactstrap/lib/TabContent';
+import TabPane from 'reactstrap/lib/TabPane';
+import Nav from 'reactstrap/lib/Nav';
+import NavItem from 'reactstrap/lib/NavItem';
+import NavLink from 'reactstrap/lib/NavLink';
 import styled from 'styled-components';
 
 const Pointer = styled.div`

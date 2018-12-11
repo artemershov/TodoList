@@ -1,5 +1,7 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'reactstrap';
+import Card from 'reactstrap/lib/Card';
+import ListGroup from 'reactstrap/lib/ListGroup';
+import ListGroupItem from 'reactstrap/lib/ListGroupItem';
 import SubtaskContainer from './SubtaskContainer';
 
 const SubtaskList = props => (

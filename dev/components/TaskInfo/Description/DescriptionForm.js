@@ -1,5 +1,10 @@
 import React from 'react';
-import { Form, FormGroup, Input, Button, Row, Col } from 'reactstrap';
+import Form from 'reactstrap/lib/Form';
+import FormGroup from 'reactstrap/lib/FormGroup';
+import Input from 'reactstrap/lib/Input';
+import Button from 'reactstrap/lib/Button';
+import Row from 'reactstrap/lib/Row';
+import Col from 'reactstrap/lib/Col';
 
 export default class DescriptionForm extends React.Component {
   state = { value: '' };

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Input, Button } from 'reactstrap';
+import Form from 'reactstrap/lib/Form';
+import Input from 'reactstrap/lib/Input';
+import Button from 'reactstrap/lib/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 

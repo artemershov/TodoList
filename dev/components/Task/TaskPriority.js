@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from 'reactstrap';
+import Badge from 'reactstrap/lib/Badge';
 import { taskPriorities } from '../../class/Task';
 
 const TaskPriority = props => (

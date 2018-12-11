@@ -2,7 +2,9 @@ import React from 'react';
 import TaskForm from './TaskForm';
 import TaskListContainer from './TaskList';
 import RemoveDoneBtn from './shared/RemoveDoneBtn';
-import { Container, Card, CardHeader } from 'reactstrap';
+import Container from 'reactstrap/lib/Container';
+import Card from 'reactstrap/lib/Card';
+import CardHeader from 'reactstrap/lib/CardHeader';
 
 const AppContainer = props => (
   <Container>

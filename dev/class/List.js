@@ -1,4 +1,6 @@
-import { compact, pull, sortBy } from 'lodash';
+import compact from 'lodash/compact';
+import pull from 'lodash/pull';
+import sortBy from 'lodash/sortBy';
 
 class SimpleList {
   constructor() {
