@@ -10,21 +10,35 @@ export default class TaskContainer extends React.Component {
     formOpen: false,
   };
 
-  infoToggle = () => this.setState({ infoOpen: !this.state.infoOpen });
-
-  formToggle = () => this.setState({ formOpen: !this.state.formOpen });
   formSubmit = data => {
-    this.props.actions.edit(this.props.data.id, data);
-    this.formToggle();
+    this.props.actions('edit')(this.props.data.id, data);
+    this.setState({ formOpen: false });
   };
 
-  taskCheck = () => {
-    this.props.actions.check(this.props.data.id);
+  taskActions = {
+    check: () => this.props.actions('check')(this.props.data.id),
+    edit: () => this.setState({ formOpen: true }),
+    remove: () => {
+      if (confirm('Вы точно хотите удалить данную задачу?')) {
+        this.props.actions('remove')(this.props.data.id);
+      }
+    },
+    info: () => this.setState({ infoOpen: !this.state.infoOpen }),
   };
-  taskRemove = () => {
-    if (confirm('Вы точно хотите удалить данную задачу?')) {
-      this.props.actions.remove(this.props.data.id);
-    }
+
+  taskInfoActions = {
+    description: this.props.actions('editDescription'),
+    comments: {
+      add: this.props.actions('commentAdd'),
+      edit: this.props.actions('commentEdit'),
+      remove: this.props.actions('commentRemove'),
+    },
+    subtasks: {
+      add: this.props.actions('subtaskAdd'),
+      edit: this.props.actions('subtaskEdit'),
+      check: this.props.actions('subtaskCheck'),
+      remove: this.props.actions('subtaskRemove'),
+    },
   };
 
   render = () => (
@@ -34,25 +48,10 @@ export default class TaskContainer extends React.Component {
           <TaskForm data={this.props.data} submit={this.formSubmit} />
         </div>
       ) : (
-        <Task
-          data={this.props.data}
-          actions={{
-            check: this.taskCheck,
-            edit: this.formToggle,
-            remove: this.taskRemove,
-            info: this.infoToggle,
-          }}
-        />
+        <Task data={this.props.data} actions={this.taskActions} />
       )}
       <Collapse isOpen={this.state.infoOpen}>
-        <TaskInfo
-          data={this.props.data}
-          actions={{
-            description: this.props.actions.editDescription,
-            comments: this.props.actions.comments,
-            subtasks: this.props.actions.subtasks,
-          }}
-        />
+        <TaskInfo data={this.props.data} actions={this.taskInfoActions} />
       </Collapse>
     </Fragment>
   );

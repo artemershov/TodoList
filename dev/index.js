@@ -17,63 +17,9 @@ try {
 class App extends React.Component {
   state = { list: [] };
 
-  actions = {
-    add: data => {
-      Todo.add(data);
-      this.updateStorage();
-    },
-    edit: (id, data) => {
-      Todo.edit(id, data);
-      this.updateStorage();
-    },
-    check: id => {
-      Todo.check(id);
-      this.updateStorage();
-    },
-    remove: id => {
-      Todo.remove(id);
-      this.updateStorage();
-    },
-    removeDone: () => {
-      Todo.removeDone();
-      this.updateStorage();
-    },
-    editDescription: (id, data) => {
-      Todo.editDescription(id, data);
-      this.updateStorage();
-    },
-    comments: {
-      add: (taskId, message) => {
-        Todo.commentAdd(taskId, message);
-        this.updateStorage();
-      },
-      edit: (taskId, id, message) => {
-        Todo.commentEdit(taskId, id, message);
-        this.updateStorage();
-      },
-      remove: (taskId, id) => {
-        Todo.commentRemove(taskId, id);
-        this.updateStorage();
-      },
-    },
-    subtasks: {
-      add: (taskId, title) => {
-        Todo.subtaskAdd(taskId, title);
-        this.updateStorage();
-      },
-      edit: (taskId, id, title) => {
-        Todo.subtaskEdit(taskId, id, title);
-        this.updateStorage();
-      },
-      check: (taskId, id) => {
-        Todo.subtaskCheck(taskId, id);
-        this.updateStorage();
-      },
-      remove: (taskId, id) => {
-        Todo.subtaskRemove(taskId, id);
-        this.updateStorage();
-      },
-    },
+  actions = method => (...args) => {
+    Todo[method](...args);
+    this.updateStorage();
   };
 
   updateStorage = () => {
