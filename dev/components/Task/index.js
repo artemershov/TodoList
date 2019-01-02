@@ -16,7 +16,10 @@ export default class TaskContainer extends React.Component {
   };
 
   taskActions = {
-    check: () => this.props.actions('check')(this.props.data.id),
+    check: () => {
+      this.props.actions('check')(this.props.data.id);
+      this.setState({ infoOpen: false });
+    },
     edit: () => this.setState({ formOpen: true }),
     remove: () => {
       if (confirm('Вы точно хотите удалить данную задачу?')) {
