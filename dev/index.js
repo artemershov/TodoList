@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList';
+import SettingsClass from './class/Settings';
 import BrowserStorage from './class/BrowserStorage';
 import AppContainer from './components/AppContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Todo = new TodoList();
+const Settings = new SettingsClass();
 let storage;
 try {
   storage = new BrowserStorage('TodoList');
@@ -15,27 +17,61 @@ try {
 }
 
 class App extends React.Component {
-  state = { list: [] };
+  state = {
+    todo: [],
+    settings: {},
+  };
 
-  actions = method => (...args) => {
+  todoActions = method => (...args) => {
     Todo[method](...args);
+    this.updateTodo();
+  };
+
+  settingsActions = method => (...args) => {
+    Settings[method](...args);
+    this.updateSettings();
+  };
+
+  updateTodo = () => {
+    Todo.sort(['date.done', 'date.add', 'done'], true);
     this.updateStorage();
+    this.setState({ todo: Todo.getOrderedList() });
+  };
+
+  updateSettings = () => {
+    this.updateStorage();
+    this.setState({ settings: Settings.getData() });
   };
 
   updateStorage = () => {
-    Todo.sort(['date.done', 'date.add', 'done'], true);
-    if (storage) storage.set(Todo.getData());
-    this.setState({ list: Todo.getOrderedList() });
+    if (storage) {
+      storage.set({
+        todo: Todo.getData(),
+        settings: Settings.getData(),
+      });
+    }
   };
 
   componentDidMount = () => {
     if (storage && storage.get()) {
-      Todo.setData(storage.get());
-      this.setState({ list: Todo.getOrderedList() });
+      const data = storage.get();
+      Todo.setData(data.todo);
+      Settings.setData(data.settings);
+      this.setState({
+        todo: Todo.getOrderedList(),
+        settings: Settings.getData(),
+      });
     }
   };
 
-  render = () => <AppContainer list={this.state.list} actions={this.actions} />;
+  render = () => (
+    <AppContainer
+      todo={this.state.todo}
+      todoActions={this.todoActions}
+      settings={this.state.settings}
+      settingsActions={this.settingsActions}
+    />
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -51,7 +51,10 @@ export default class Header extends React.Component {
       <Collapse isOpen={this.state.isOpen}>
         <div className="py-2 shadow bg-light">
           <Container>
-            <Settings />
+            <Settings
+              settings={this.props.settings}
+              actions={this.props.actions}
+            />
           </Container>
         </div>
       </Collapse>
