@@ -87,7 +87,7 @@ const sorting = {
   },
   '0': {
     title: 'По статусу',
-    param: ['date.done', 'date.add', 'done'],
+    param: ['date.add', 'date.done', 'done'],
   },
   '1': {
     title: 'По дате создания',
@@ -95,7 +95,7 @@ const sorting = {
   },
   '2': {
     title: 'По приоритету',
-    param: ['priotity', 'date.add', 'done'],
+    param: ['priority', 'date.add', 'done'],
   },
   '3': {
     title: 'По дедлайну',
