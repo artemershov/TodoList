@@ -87,19 +87,19 @@ const sorting = {
   },
   '0': {
     title: 'По статусу',
-    param: ['date.add', 'date.done', 'done'],
+    param: [['date.done', 'date.add', 'done'], ['desc', 'desc', 'asc']],
   },
   '1': {
     title: 'По дате создания',
-    param: ['date.add'],
+    param: [['date.add'], ['desc']],
   },
   '2': {
     title: 'По приоритету',
-    param: ['priority', 'date.add', 'done'],
+    param: [['priority', 'date.done', 'date.add', 'done'], ['desc', 'desc', 'desc', 'asc']],
   },
   '3': {
     title: 'По дедлайну',
-    param: ['date.deadline', 'done'],
+    param: [['date.deadline', 'date.done', 'date.add', 'done'], ['asc', 'desc', 'desc', 'asc']],
   },
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList';
-import SettingsClass from './class/Settings';
+import SettingsClass, { sorting } from './class/Settings';
 import BrowserStorage from './class/BrowserStorage';
 import AppContainer from './components/AppContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,7 +24,9 @@ class App extends React.Component {
 
   todoActions = method => (...args) => {
     Todo[method](...args);
-    Todo.sort(['date.done', 'date.add', 'done'], true);
+    if (['add', 'edit', 'check', 'remove', 'removeDone'].includes(method)) {
+      Todo.sort(sorting[this.state.settings.sort].param, this.state.settings.reverse);
+    }
     this.setState(prevState => ({
       todo: Todo.getOrderedList(),
       settings: prevState.settings,
@@ -36,7 +38,17 @@ class App extends React.Component {
     this.setState(prevState => ({
       todo: prevState.todo,
       settings: Settings.getData(),
-    }), this.updateStorage);
+    }), () => {
+      if (method == 'setSort' || method == 'setReverse') {
+        Todo.sort(sorting[this.state.settings.sort].param, this.state.settings.reverse);
+        this.setState(prevState => ({
+          todo: Todo.getOrderedList(),
+          settings: prevState.settings,
+        }), this.updateStorage);
+      } else {
+        this.updateStorage();
+      }
+    });
   };
 
   updateStorage = () => {

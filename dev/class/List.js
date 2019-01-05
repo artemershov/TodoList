@@ -1,6 +1,6 @@
 import compact from 'lodash/compact';
 import pull from 'lodash/pull';
-import sortBy from 'lodash/sortBy';
+import orderBy from 'lodash/orderBy';
 
 class SimpleList {
   constructor() {
@@ -83,8 +83,8 @@ const listRemove = (list, id) => {
   return 1;
 };
 
-const listSort = (list, key, reverse = false) => {
-  list.order = compact(sortBy(list.list, key).map(i => i && i.id));
+const listSort = (list, param, reverse = false) => {
+  list.order = compact(orderBy(list.list, ...param).map(i => i && i.id));
   if (reverse) list.order.reverse();
   return list.order;
 };
