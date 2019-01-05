@@ -24,23 +24,19 @@ class App extends React.Component {
 
   todoActions = method => (...args) => {
     Todo[method](...args);
-    this.updateTodo();
+    Todo.sort(['date.done', 'date.add', 'done'], true);
+    this.setState(prevState => ({
+      todo: Todo.getOrderedList(),
+      settings: prevState.settings,
+    }), this.updateStorage);
   };
 
   settingsActions = method => (...args) => {
     Settings[method](...args);
-    this.updateSettings();
-  };
-
-  updateTodo = () => {
-    Todo.sort(['date.done', 'date.add', 'done'], true);
-    this.updateStorage();
-    this.setState({ todo: Todo.getOrderedList() });
-  };
-
-  updateSettings = () => {
-    this.updateStorage();
-    this.setState({ settings: Settings.getData() });
+    this.setState(prevState => ({
+      todo: prevState.todo,
+      settings: Settings.getData(),
+    }), this.updateStorage);
   };
 
   updateStorage = () => {
