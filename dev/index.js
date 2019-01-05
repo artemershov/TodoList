@@ -25,30 +25,45 @@ class App extends React.Component {
   todoActions = method => (...args) => {
     Todo[method](...args);
     if (['add', 'edit', 'check', 'remove', 'removeDone'].includes(method)) {
-      Todo.sort(sorting[this.state.settings.sort].param, this.state.settings.reverse);
+      Todo.sort(
+        sorting[this.state.settings.sort].param,
+        this.state.settings.reverse
+      );
     }
-    this.setState(prevState => ({
-      todo: Todo.getOrderedList(),
-      settings: prevState.settings,
-    }), this.updateStorage);
+    this.setState(
+      prevState => ({
+        todo: Todo.getOrderedList(),
+        settings: prevState.settings,
+      }),
+      this.updateStorage
+    );
   };
 
   settingsActions = method => (...args) => {
     Settings[method](...args);
-    this.setState(prevState => ({
-      todo: prevState.todo,
-      settings: Settings.getData(),
-    }), () => {
-      if (method == 'setSort' || method == 'setReverse') {
-        Todo.sort(sorting[this.state.settings.sort].param, this.state.settings.reverse);
-        this.setState(prevState => ({
-          todo: Todo.getOrderedList(),
-          settings: prevState.settings,
-        }), this.updateStorage);
-      } else {
-        this.updateStorage();
+    this.setState(
+      prevState => ({
+        todo: prevState.todo,
+        settings: Settings.getData(),
+      }),
+      () => {
+        if (method == 'setSort' || method == 'setReverse') {
+          Todo.sort(
+            sorting[this.state.settings.sort].param,
+            this.state.settings.reverse
+          );
+          this.setState(
+            prevState => ({
+              todo: Todo.getOrderedList(),
+              settings: prevState.settings,
+            }),
+            this.updateStorage
+          );
+        } else {
+          this.updateStorage();
+        }
       }
-    });
+    );
   };
 
   updateStorage = () => {

@@ -95,11 +95,17 @@ const sorting = {
   },
   '2': {
     title: 'По приоритету',
-    param: [['priority', 'date.done', 'date.add', 'done'], ['desc', 'desc', 'desc', 'asc']],
+    param: [
+      ['priority', 'date.done', 'date.add', 'done'],
+      ['desc', 'desc', 'desc', 'asc'],
+    ],
   },
   '3': {
     title: 'По дедлайну',
-    param: [['date.deadline', 'date.done', 'date.add', 'done'], ['asc', 'desc', 'desc', 'asc']],
+    param: [
+      ['date.deadline', 'date.done', 'date.add', 'done'],
+      ['asc', 'desc', 'desc', 'asc'],
+    ],
   },
 };
 
