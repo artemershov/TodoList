@@ -48,16 +48,9 @@ class App extends React.Component {
       }),
       () => {
         if (method == 'setSort' || method == 'setReverse') {
-          Todo.sort(
+          this.todoActions('sort')(
             sorting[this.state.settings.sort].param,
             this.state.settings.reverse
-          );
-          this.setState(
-            prevState => ({
-              todo: Todo.getOrderedList(),
-              settings: prevState.settings,
-            }),
-            this.updateStorage
           );
         } else {
           this.updateStorage();
