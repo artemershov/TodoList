@@ -6,8 +6,8 @@ import merge from 'lodash/merge';
 import pullAll from 'lodash/pullAll';
 
 export default class TodoList extends ExtendedList {
-  constructor() {
-    super();
+  constructor(data) {
+    super(data);
   }
 
   add(data) {
