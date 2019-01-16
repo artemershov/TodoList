@@ -1,8 +1,7 @@
-export default class BrowserStorage {
+class WebStorageClass {
   constructor(name, session = false) {
     this.name = name;
     this.storage = session ? sessionStorage : localStorage;
-    return this;
   }
 
   get data() {
@@ -29,3 +28,13 @@ export default class BrowserStorage {
     return this.storage.removeItem(this.name);
   }
 }
+
+const WebStorage = (name, session = false) => {
+  try {
+    return new WebStorageClass(name, session);
+  } catch(e) {
+    return null;
+  }
+};
+
+export default WebStorage;

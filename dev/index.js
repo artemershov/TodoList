@@ -2,22 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList';
 import SettingsClass, { filtering, sorting } from './class/Settings';
-import BrowserStorage from './class/BrowserStorage';
+import WebStorageClass from './class/WebStorage';
 import AppContainer from './components/AppContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Todo = new TodoList();
-const Settings = new SettingsClass();
-let storage;
-try {
-  storage = new BrowserStorage('TodoList');
-  const { todo, settings } = storage.get();
-  Todo.setData(todo);
-  Settings.setData(settings);
-} catch (e) {
-  // localStorage doesn't work on file:// urls
-  storage = null;
-}
+const WebStorage = WebStorageClass('TodoList');
+const data = WebStorage && WebStorage.get();
+const Todo = new TodoList(data && data.todo || null);
+const Settings = new SettingsClass(data && data.settings || null);
 
 class App extends React.Component {
   state = {
@@ -56,8 +48,8 @@ class App extends React.Component {
   };
 
   updateStorage = () => {
-    if (storage) {
-      storage.set({
+    if (WebStorage) {
+      WebStorage.set({
         todo: Todo.getData(),
         settings: Settings.getData(),
       });
