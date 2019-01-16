@@ -113,31 +113,31 @@ const filtering = {
   list: [0, 1, 2, 3, 4, 5, 6],
   '0': {
     title: 'Без фильтра',
-    param: '',
+    param: el => el && el,
   },
   '1': {
     title: 'Выполненные',
-    param: '',
+    param: el => el && el.done,
   },
   '2': {
     title: 'Не выполненные',
-    param: '',
+    param: el => el && !el.done,
   },
   '3': {
     title: 'С приоритетом',
-    param: '',
+    param: el => el && el.priority,
   },
   '4': {
     title: 'Без приоритета',
-    param: '',
+    param: el => el && !el.priority,
   },
   '5': {
     title: 'С дедлайном',
-    param: '',
+    param: el => el && el.date.deadline,
   },
   '6': {
     title: 'Без дедлайна',
-    param: '',
+    param: el => el && !el.date.deadline,
   },
 };
 
