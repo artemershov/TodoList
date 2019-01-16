@@ -11,6 +11,9 @@ const Settings = new SettingsClass();
 let storage;
 try {
   storage = new BrowserStorage('TodoList');
+  const { todo, settings } = storage.get();
+  Todo.setData(todo);
+  Settings.setData(settings);
 } catch (e) {
   // localStorage doesn't work on file:// urls
   storage = null;
@@ -24,41 +27,32 @@ class App extends React.Component {
 
   todoActions = method => (...args) => {
     Todo[method](...args);
-    if (['add', 'edit', 'check', 'remove', 'removeDone'].includes(method)) {
-      Todo.setOrderByParams(
-        filtering[this.state.settings.filter].param,
-        sorting[this.state.settings.sort].param,
-        this.state.settings.reverse
-      );
-    }
-    this.setState(
-      prevState => ({
-        todo: Todo.getOrderedList(),
-        settings: prevState.settings,
-      }),
-      this.updateStorage
-    );
+    const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
+    this.updateTodo(methodsToUpdate.includes(method));
   };
 
   settingsActions = method => (...args) => {
     Settings[method](...args);
-    this.setState(
-      prevState => ({
-        todo: prevState.todo,
-        settings: Settings.getData(),
-      }),
-      () => {
-        if (['setFilter', 'setSort', 'setReverse'].includes(method)) {
-          this.todoActions('setOrderByParams')(
-            filtering[this.state.settings.filter].param,
-            sorting[this.state.settings.sort].param,
-            this.state.settings.reverse
-          );
-        } else {
-          this.updateStorage();
-        }
-      }
-    );
+    const settings = Settings.getData();
+    this.setState({ settings }, () => {
+      const methodsToUpdate = ['setFilter', 'setSort', 'setReverse'];
+      methodsToUpdate.includes(method)
+        ? this.updateTodo(true)
+        : this.updateStorage();
+    });
+  };
+
+  updateTodo = (updateOrder = false) => {
+    if (updateOrder) {
+      const settings = this.state.settings;
+      Todo.setOrderByParams(
+        filtering[settings.filter].param,
+        sorting[settings.sort].param,
+        settings.reverse
+      );
+    }
+    const todo = Todo.getOrderedList();
+    this.setState({ todo }, this.updateStorage);
   };
 
   updateStorage = () => {
@@ -71,15 +65,10 @@ class App extends React.Component {
   };
 
   componentDidMount = () => {
-    if (storage && storage.get()) {
-      const data = storage.get();
-      Todo.setData(data.todo);
-      Settings.setData(data.settings);
-      this.setState({
-        todo: Todo.getOrderedList(),
-        settings: Settings.getData(),
-      });
-    }
+    this.setState({
+      todo: Todo.getOrderedList(),
+      settings: Settings.getData(),
+    });
   };
 
   render = () => (
