@@ -1,5 +1,6 @@
 import Task, { SimpleTask, History, Comment } from './Task';
 import { ExtendedList, listAdd, listRemove, listSort } from './List';
+import { sorting } from './Settings';
 import filter from 'lodash/filter';
 import merge from 'lodash/merge';
 import pullAll from 'lodash/pullAll';
@@ -80,7 +81,7 @@ export default class TodoList extends ExtendedList {
       task.subtasks,
       new SimpleTask(task.subtasks.lastId + 1, title)
     );
-    listSort(task.subtasks, ['date.done', 'date.add', 'done'], true);
+    listSort(task.subtasks, sorting['0'].param, false);
     return id;
   }
 
@@ -104,7 +105,7 @@ export default class TodoList extends ExtendedList {
       task.history,
       new History(task.history.lastId + 1, subtask.done ? 7 : 8)
     );
-    listSort(task.subtasks, ['date.done', 'date.add', 'done'], true);
+    listSort(task.subtasks, sorting['0'].param, false);
     return true;
   }
 
