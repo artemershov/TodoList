@@ -73,11 +73,8 @@ export default class ExtendedList extends List {
     return this.order.map(i => i && this.list[i]);
   }
 
-  setOrderByParams(filterParam, sortParam, reverseParam) {
-    const filtered = filter(this.list, filterParam);
-    const sorted = orderBy(filtered, ...sortParam);
-    if (reverseParam) sorted.reverse();
-    this.order = sorted.map(i => i && i.id);
+  updateOrder(param) {
+    return listUpdateOrder(this, param);
   }
 }
 
@@ -105,6 +102,15 @@ const listFilter = (list, param) => {
   return list.order;
 };
 
+const listUpdateOrder = (list, param) => {
+  let tempList = list.list;
+  if (param.filter) tempList = filter(tempList, param.filter);
+  if (param.sort) tempList = orderBy(tempList, ...param.sort);
+  if (param.reverse) tempList.reverse();
+  list.order = tempList.map(i => i && i.id);
+  return list.order;
+};
+
 export {
   SimpleList,
   List,
@@ -113,4 +119,5 @@ export {
   listRemove,
   listSort,
   listFilter,
+  listUpdateOrder,
 };
