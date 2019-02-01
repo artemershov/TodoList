@@ -6,18 +6,18 @@ import CardHeader from 'reactstrap/lib/CardHeader';
 
 export default class TaskGroup extends React.Component {
   submit = this.props.actions('add');
-  render = () => (
-    <div>
-      <h1 className="display-3 text-white text-center my-4">TodoList</h1>
+  render = () => this.props.groups && this.props.groups.map((el, idx) => (
+    <div key={idx}>
+      <h1 className="display-3 text-white text-center my-4">{el.title}</h1>
       <Card className="mb-4">
         <CardHeader className="px-3">
           <TaskForm submit={this.submit} />
         </CardHeader>
         <TaskListContainer
-          list={this.props.list}
+          list={el.list}
           actions={this.props.actions}
         />
       </Card>
     </div>
-  );
+  ));
 }

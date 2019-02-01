@@ -13,7 +13,10 @@ export default class AppContainer extends React.Component {
         actions={this.props.settingsActions}
       />
       <Container className="pt-5">
-        <TaskGroup list={this.props.todo} actions={this.props.todoActions} />
+        <TaskGroup
+          actions={this.props.todoActions}
+          groups={this.props.groups}
+          groupsActions={this.props.groupsActions} />
         <div className="text-center mb-4">
           <RemoveDoneBtn remove={this.remove} />
         </div>

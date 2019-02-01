@@ -1,56 +1,80 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList';
+import GroupList from './class/Groups';
 import SettingsClass, { filtering, sorting } from './class/Settings';
 import WebStorageClass from './class/WebStorage';
 import AppContainer from './components/AppContainer';
+import pullAll from 'lodash/pullAll';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const WebStorage = WebStorageClass('TodoList');
 const data = WebStorage && WebStorage.get();
-const Todo = new TodoList(data && data.todo || null);
-const Settings = new SettingsClass(data && data.settings || null);
+const Todo = new TodoList((data && data.todo) || null);
+const Group = new GroupList((data && data.group) || null);
+const Settings = new SettingsClass((data && data.settings) || null);
 
 class App extends React.Component {
   state = {
-    todo: [],
+    groups: [],
     settings: {},
   };
 
   todoActions = method => (...args) => {
     Todo[method](...args);
     const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
-    this.updateTodo(methodsToUpdate.includes(method));
+    if (methodsToUpdate.includes(method)) this.updateOrder();
+    this.setState({ groups: this.getGroups() }, this.updateStorage);
+  };
+
+  groupsActions = method => (...args) => {
+    Group[method](...args);
+    this.setState({ groups: this.getGroups() }, this.updateStorage);
   };
 
   settingsActions = method => (...args) => {
     Settings[method](...args);
-    const settings = Settings.getData();
-    this.setState({ settings }, () => {
-      const methodsToUpdate = ['setFilter', 'setSort', 'setReverse'];
-      methodsToUpdate.includes(method)
-        ? this.updateTodo(true)
-        : this.updateStorage();
-    });
+    this.updateOrder();
+    this.setState(
+      { settings: Settings.getData(), groups: this.getGroups() },
+      this.updateStorage
+    );
   };
 
-  updateTodo = (updateOrder = false) => {
-    if (updateOrder) {
-      const settings = this.state.settings;
-      Todo.setOrderByParams(
-        filtering[settings.filter].param,
-        sorting[settings.sort].param,
-        settings.reverse
-      );
+  getGroups = () => {
+    const taskList = Todo.getList();
+    const taskOrder = Todo.getOrder();
+    const groups = Group.getOrderedList().map(group => {
+      const groupList = group.list;
+      group.list = taskOrder
+        .filter(i => groupList.includes(i))
+        .map(taskId => taskList[taskId]);
+      pullAll(taskOrder, groupList);
+      return group;
+    });
+    if (taskOrder.length) {
+      groups.push({
+        title: 'Без группы',
+        list: taskOrder.map(i => taskList[i]),
+      });
     }
-    const todo = Todo.getOrderedList();
-    this.setState({ todo }, this.updateStorage);
+    return groups;
+  };
+
+  updateOrder = () => {
+    const settings = Settings.getData();
+    Todo.updateOrder({
+      filter: filtering[settings.filter].param,
+      sort: sorting[settings.sort].param,
+      reverse: settings.reverse,
+    });
   };
 
   updateStorage = () => {
     if (WebStorage) {
       WebStorage.set({
         todo: Todo.getData(),
+        groups: Group.getData(),
         settings: Settings.getData(),
       });
     }
@@ -58,15 +82,16 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.setState({
-      todo: Todo.getOrderedList(),
+      groups: this.getGroups(),
       settings: Settings.getData(),
     });
   };
 
   render = () => (
     <AppContainer
-      todo={this.state.todo}
       todoActions={this.todoActions}
+      groups={this.state.groups}
+      groupsActions={this.groupsActions}
       settings={this.state.settings}
       settingsActions={this.settingsActions}
     />
