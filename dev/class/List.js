@@ -107,7 +107,7 @@ const listUpdateOrder = (list, param) => {
   if (param.filter) tempList = filter(tempList, param.filter);
   if (param.sort) tempList = orderBy(tempList, ...param.sort);
   if (param.reverse) tempList.reverse();
-  list.order = tempList.map(i => i && i.id);
+  list.order = compact(tempList.map(i => i && i.id));
   return list.order;
 };
 
