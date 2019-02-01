@@ -1,5 +1,5 @@
 import React from 'react';
-import { grouping, sorting, filtering } from '../../class/Settings';
+import { sorting, filtering } from '../../class/Settings';
 import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';
 import FormGroup from 'reactstrap/lib/FormGroup';
@@ -7,28 +7,12 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 
 export default class Settings extends React.Component {
-  setGroup = e => this.props.actions('setGroup')(e.target.value);
   setFilter = e => this.props.actions('setFilter')(e.target.value);
   setSort = e => this.props.actions('setSort')(e.target.value);
   setReverse = e => this.props.actions('setReverse')(e.target.checked);
 
   render = () => (
     <Row>
-      <Col>
-        <FormGroup>
-          <Label>Группировка</Label>
-          <Input
-            type="select"
-            onChange={this.setGroup}
-            value={this.props.settings.group}>
-            {grouping.list.map(i => (
-              <option value={i} key={i}>
-                {grouping[i].title}
-              </option>
-            ))}
-          </Input>
-        </FormGroup>
-      </Col>
       <Col>
         <FormGroup>
           <Row>

@@ -1,5 +1,4 @@
 const defaultSettings = {
-  group: 0,
   filter: 0,
   sort: 0,
   reverse: false,
@@ -8,10 +7,6 @@ const defaultSettings = {
 export default class Settings {
   constructor(settings = null) {
     this.setData(settings || defaultSettings);
-  }
-
-  getGroup() {
-    return this.group;
   }
 
   getFilter() {
@@ -35,10 +30,6 @@ export default class Settings {
     };
   }
 
-  setGroup(data) {
-    this.group = data;
-  }
-
   setFilter(data) {
     this.filter = data;
   }
@@ -52,32 +43,11 @@ export default class Settings {
   }
 
   setData(data) {
-    this.group = data.group;
     this.filter = data.filter;
     this.sort = data.sort;
     this.reverse = data.reverse;
   }
 }
-
-const grouping = {
-  list: [0, 1, 2, 3],
-  '0': {
-    title: 'По проектам',
-    param: '',
-  },
-  '1': {
-    title: 'По приоритетам',
-    param: '',
-  },
-  '2': {
-    title: 'По дедлайну',
-    param: '',
-  },
-  '3': {
-    title: 'По статусу',
-    param: '',
-  },
-};
 
 const sorting = {
   list: [0, 1, 2, 3],
@@ -141,4 +111,4 @@ const filtering = {
   },
 };
 
-export { defaultSettings, grouping, sorting, filtering };
+export { defaultSettings, sorting, filtering };
