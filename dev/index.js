@@ -1,19 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './class/TodoList';
-import GroupList from './class/Groups';
-import SettingsClass, { filterParam, sortParam } from './class/Settings';
-import WebStorageClass from './class/WebStorage';
+import TodoAppClass from './class/TodoApp';
 import AppContainer from './components/AppContainer';
-import some from 'lodash/some';
-import pullAll from 'lodash/pullAll';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const WebStorage = WebStorageClass('TodoList');
-const data = WebStorage && WebStorage.get();
-const Todo = new TodoList((data && data.todo) || null);
-const Group = new GroupList((data && data.group) || null);
-const Settings = new SettingsClass((data && data.settings) || null);
+const TodoApp = new TodoAppClass();
 
 class App extends React.Component {
   state = {
@@ -22,92 +13,28 @@ class App extends React.Component {
   };
 
   todoActions = method => (...args) => {
-    Todo[method](...args);
-    const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
-    if (methodsToUpdate.includes(method)) this.updateOrder();
-    this.setState({ groups: this.getGroups() }, this.updateStorage);
+    TodoApp.todoActions(method, ...args);
+    this.setState({ groups: TodoApp.getGroups() });
   };
 
   groupsActions = method => (...args) => {
-    Group[method](...args);
-    this.setState({ groups: this.getGroups() }, this.updateStorage);
+    TodoApp.groupsActions(method, ...args);
+    this.setState({ groups: TodoApp.getGroups() });
   };
 
   settingsActions = method => (...args) => {
-    Settings[method](...args);
-    this.updateOrder();
-    this.setState(
-      { settings: Settings.getData(), groups: this.getGroups() },
-      this.updateStorage
-    );
+    TodoApp.settingsActions(method, ...args);
+    this.setState({ settings: TodoApp.getSettings(), groups: TodoApp.getGroups() });
   };
 
   searchAction = query => {
-    let groups;
-    if (query) {
-      const regexp = new RegExp(query, 'gi');
-      const todo = Todo.getOrderedList().filter(
-        task =>
-          regexp.test(task.title) ||
-          regexp.test(task.description) ||
-          some(task.subtasks.list, el => regexp.test(el.title)) ||
-          some(task.comments.list, el => regexp.test(el.message))
-      );
-      groups = [
-        {
-          title: `Поиск: ${query}`,
-          list: todo,
-        },
-      ];
-    } else {
-      groups = this.getGroups();
-    }
-    this.setState({ groups });
-  };
-
-  getGroups = () => {
-    const taskList = Todo.getList();
-    const taskOrder = Todo.getOrder();
-    const groups = Group.getOrderedList().map(group => {
-      const groupList = group.list;
-      group.list = taskOrder
-        .filter(i => groupList.includes(i))
-        .map(taskId => taskList[taskId]);
-      pullAll(taskOrder, groupList);
-      return group;
-    });
-    if (taskOrder.length) {
-      groups.push({
-        title: 'Без группы',
-        list: taskOrder.map(i => taskList[i]),
-      });
-    }
-    return groups;
-  };
-
-  updateOrder = () => {
-    const settings = Settings.getData();
-    Todo.updateOrder({
-      filter: filterParam[settings.filter].param,
-      sort: sortParam[settings.sort].param,
-      reverse: settings.reverse,
-    });
-  };
-
-  updateStorage = () => {
-    if (WebStorage) {
-      WebStorage.set({
-        todo: Todo.getData(),
-        groups: Group.getData(),
-        settings: Settings.getData(),
-      });
-    }
+    this.setState({ groups: TodoApp.searchAction(query) });
   };
 
   componentDidMount = () => {
     this.setState({
-      groups: this.getGroups(),
-      settings: Settings.getData(),
+      groups: TodoApp.getGroups(),
+      settings: TodoApp.getSettings(),
     });
   };
 
