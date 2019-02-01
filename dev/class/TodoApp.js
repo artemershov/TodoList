@@ -11,12 +11,13 @@ export default class TodoApp {
     this.groups = new GroupList();
     this.settings = new SettingsClass();
     this.storage = WebStorageClass('TodoList');
-    if (this.storage) {
+    if (this.storage && this.storage.get()) {
       const data = this.storage.get();
       this.todo.setData(data.todo || null);
       this.groups.setData(data.groups || null);
       this.settings.setData(data.settings || null);
     }
+    if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
   }
 
   todoActions(method, ...args) {
