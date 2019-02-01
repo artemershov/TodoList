@@ -32,7 +32,7 @@ class WebStorageClass {
 const WebStorage = (name, session = false) => {
   try {
     return new WebStorageClass(name, session);
-  } catch(e) {
+  } catch (e) {
     return null;
   }
 };

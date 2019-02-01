@@ -24,7 +24,10 @@ class App extends React.Component {
 
   settingsActions = method => (...args) => {
     TodoApp.settingsActions(method, ...args);
-    this.setState({ settings: TodoApp.getSettings(), groups: TodoApp.getGroups() });
+    this.setState({
+      settings: TodoApp.getSettings(),
+      groups: TodoApp.getGroups(),
+    });
   };
 
   searchAction = query => {
