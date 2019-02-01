@@ -7,7 +7,11 @@ const TaskList = props => (
   <ListGroup flush>
     {props.list.map(i => (
       <ListGroupItem className="px-2" key={i.id}>
-        <TaskContainer data={i} actions={props.actions} />
+        <TaskContainer
+          groupId={props.groupId}
+          data={i}
+          actions={props.actions}
+        />
       </ListGroupItem>
     ))}
   </ListGroup>

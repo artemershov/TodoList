@@ -3,7 +3,7 @@ import GroupList from './Groups';
 import SettingsClass, { filterParam, sortParam } from './Settings';
 import WebStorageClass from './WebStorage';
 import some from 'lodash/some';
-import pullAll from 'lodash/pullAll';
+import difference from 'lodash/difference';
 
 export default class TodoApp {
   constructor() {
@@ -21,7 +21,23 @@ export default class TodoApp {
   }
 
   todoActions(method, ...args) {
-    this.todo[method](...args);
+    switch (method) {
+      case 'add': {
+        const [data, groupId] = args;
+        const id = this.todo.add(data);
+        if (groupId) this.groups.itemAdd(groupId, id);
+        break;
+      }
+      case 'remove': {
+        const [id, groupId] = args;
+        this.todo.remove(id);
+        if (groupId) this.groups.itemRemove(groupId, id);
+        break;
+      }
+      default:
+        this.todo[method](...args);
+        break;
+    }
     const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
     if (methodsToUpdate.includes(method)) this.updateOrder();
     this.updateStorage();
@@ -42,7 +58,7 @@ export default class TodoApp {
     let groups;
     if (query) {
       const regexp = new RegExp(query, 'gi');
-      const todo = this.todo
+      const list = this.todo
         .getOrderedList()
         .filter(
           task =>
@@ -53,8 +69,9 @@ export default class TodoApp {
         );
       groups = [
         {
+          id: null,
           title: `Поиск: ${query}`,
-          list: todo,
+          list,
         },
       ];
     } else {
@@ -65,17 +82,17 @@ export default class TodoApp {
 
   getGroups() {
     const taskList = this.todo.getList();
-    const taskOrder = this.todo.getOrder();
+    let taskOrder = this.todo.getOrder();
     const groups = this.groups.getOrderedList().map(group => {
-      const groupList = group.list;
-      group.list = taskOrder
-        .filter(i => groupList.includes(i))
+      const list = taskOrder
+        .filter(i => group.list.includes(i))
         .map(taskId => taskList[taskId]);
-      pullAll(taskOrder, groupList);
-      return group;
+      taskOrder = difference(taskOrder, group.list);
+      return { ...group, list };
     });
     if (taskOrder.length) {
       groups.push({
+        id: null,
         title: 'Без группы',
         list: taskOrder.map(i => taskList[i]),
       });

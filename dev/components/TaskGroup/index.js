@@ -12,10 +12,16 @@ export default class TaskGroup extends React.Component {
       <div key={idx}>
         <h1 className="display-3 text-white text-center my-4">{el.title}</h1>
         <Card className="mb-4">
-          <CardHeader className="px-3">
-            <TaskForm submit={this.submit} />
-          </CardHeader>
-          <TaskListContainer list={el.list} actions={this.props.todoActions} />
+          {el.id && (
+            <CardHeader className="px-3">
+              <TaskForm groupId={el.id} submit={this.submit} />
+            </CardHeader>
+          )}
+          <TaskListContainer
+            groupId={el.id}
+            list={el.list}
+            actions={this.props.todoActions}
+          />
         </Card>
       </div>
     ));

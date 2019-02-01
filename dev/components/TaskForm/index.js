@@ -26,11 +26,14 @@ export default class TaskForm extends React.Component {
     const { priority, deadline } = this.state;
     const title = this.state.title.trim();
     if (title) {
-      this.props.submit({
-        title,
-        priority,
-        deadline: deadline ? deadline.getTime() : null,
-      });
+      this.props.submit(
+        {
+          title,
+          priority,
+          deadline: deadline ? deadline.getTime() : null,
+        },
+        this.props.groupId
+      );
       this.resetForm();
     } else {
       this.setState({ title: '' });

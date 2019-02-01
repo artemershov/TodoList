@@ -23,7 +23,7 @@ export default class TaskContainer extends React.Component {
     edit: () => this.setState({ formOpen: true }),
     remove: () => {
       if (confirm('Вы точно хотите удалить данную задачу?')) {
-        this.props.actions('remove')(this.props.data.id);
+        this.props.actions('remove')(this.props.data.id, this.props.groupId);
       }
     },
     info: () => this.setState({ infoOpen: !this.state.infoOpen }),
