@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoList from './class/TodoList';
 import GroupList from './class/Groups';
-import SettingsClass, { filtering, sorting } from './class/Settings';
+import SettingsClass, { filterParam, sortParam } from './class/Settings';
 import WebStorageClass from './class/WebStorage';
 import AppContainer from './components/AppContainer';
 import pullAll from 'lodash/pullAll';
@@ -64,8 +64,8 @@ class App extends React.Component {
   updateOrder = () => {
     const settings = Settings.getData();
     Todo.updateOrder({
-      filter: filtering[settings.filter].param,
-      sort: sorting[settings.sort].param,
+      filter: filterParam[settings.filter].param,
+      sort: sortParam[settings.sort].param,
       reverse: settings.reverse,
     });
   };

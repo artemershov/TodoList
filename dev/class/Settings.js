@@ -49,7 +49,7 @@ export default class Settings {
   }
 }
 
-const sorting = {
+const sortParam = {
   list: [0, 1, 2, 3],
   reverse: {
     title: 'В обратном порядке',
@@ -79,7 +79,7 @@ const sorting = {
   },
 };
 
-const filtering = {
+const filterParam = {
   list: [0, 1, 2, 3, 4, 5, 6],
   '0': {
     title: 'Без фильтра',
@@ -111,4 +111,4 @@ const filtering = {
   },
 };
 
-export { defaultSettings, sorting, filtering };
+export { defaultSettings, sortParam, filterParam };

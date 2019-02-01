@@ -14,7 +14,7 @@ export default class AppContainer extends React.Component {
       />
       <Container className="pt-5">
         <TaskGroup
-          actions={this.props.todoActions}
+          todoActions={this.props.todoActions}
           groups={this.props.groups}
           groupsActions={this.props.groupsActions} />
         <div className="text-center mb-4">

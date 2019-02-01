@@ -1,5 +1,5 @@
 import React from 'react';
-import { sorting, filtering } from '../../class/Settings';
+import { sortParam, filterParam } from '../../class/Settings';
 import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';
 import FormGroup from 'reactstrap/lib/FormGroup';
@@ -30,7 +30,7 @@ export default class Settings extends React.Component {
                     onChange={this.setReverse}
                     checked={this.props.settings.reverse || false}
                   />
-                  {sorting.reverse.title}
+                  {sortParam.reverse.title}
                 </Label>
               </FormGroup>
             </Col>
@@ -39,9 +39,9 @@ export default class Settings extends React.Component {
             type="select"
             onChange={this.setSort}
             value={this.props.settings.sort}>
-            {sorting.list.map(i => (
+            {sortParam.list.map(i => (
               <option value={i} key={i}>
-                {sorting[i].title}
+                {sortParam[i].title}
               </option>
             ))}
           </Input>
@@ -54,9 +54,9 @@ export default class Settings extends React.Component {
             type="select"
             onChange={this.setFilter}
             value={this.props.settings.filter}>
-            {filtering.list.map(i => (
+            {filterParam.list.map(i => (
               <option value={i} key={i}>
-                {filtering[i].title}
+                {filterParam[i].title}
               </option>
             ))}
           </Input>

@@ -5,7 +5,7 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 
 export default class TaskGroup extends React.Component {
-  submit = this.props.actions('add');
+  submit = this.props.todoActions('add');
   render = () => this.props.groups && this.props.groups.map((el, idx) => (
     <div key={idx}>
       <h1 className="display-3 text-white text-center my-4">{el.title}</h1>
@@ -15,7 +15,7 @@ export default class TaskGroup extends React.Component {
         </CardHeader>
         <TaskListContainer
           list={el.list}
-          actions={this.props.actions}
+          actions={this.props.todoActions}
         />
       </Card>
     </div>
