@@ -5,6 +5,7 @@ import GroupList from './class/Groups';
 import SettingsClass, { filterParam, sortParam } from './class/Settings';
 import WebStorageClass from './class/WebStorage';
 import AppContainer from './components/AppContainer';
+import some from 'lodash/some';
 import pullAll from 'lodash/pullAll';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -39,6 +40,29 @@ class App extends React.Component {
       { settings: Settings.getData(), groups: this.getGroups() },
       this.updateStorage
     );
+  };
+
+  searchAction = query => {
+    let groups;
+    if (query) {
+      const regexp = new RegExp(query, 'gi');
+      const todo = Todo.getOrderedList().filter(
+        task =>
+          regexp.test(task.title) ||
+          regexp.test(task.description) ||
+          some(task.subtasks.list, el => regexp.test(el.title)) ||
+          some(task.comments.list, el => regexp.test(el.message))
+      );
+      groups = [
+        {
+          title: `Поиск: ${query}`,
+          list: todo,
+        },
+      ];
+    } else {
+      groups = this.getGroups();
+    }
+    this.setState({ groups });
   };
 
   getGroups = () => {
@@ -89,6 +113,7 @@ class App extends React.Component {
 
   render = () => (
     <AppContainer
+      searchAction={this.searchAction}
       todoActions={this.todoActions}
       groups={this.state.groups}
       groupsActions={this.groupsActions}

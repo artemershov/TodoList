@@ -9,14 +9,16 @@ export default class AppContainer extends React.Component {
   render = () => (
     <Fragment>
       <Header
+        searchAction={this.props.searchAction}
         settings={this.props.settings}
-        actions={this.props.settingsActions}
+        settingsActions={this.props.settingsActions}
       />
       <Container className="pt-5">
         <TaskGroup
           todoActions={this.props.todoActions}
           groups={this.props.groups}
-          groupsActions={this.props.groupsActions} />
+          groupsActions={this.props.groupsActions}
+        />
         <div className="text-center mb-4">
           <RemoveDoneBtn remove={this.remove} />
         </div>
