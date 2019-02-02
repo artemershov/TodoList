@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Task from './Task';
 import TaskForm from '../TaskForm';
 import TaskInfo from '../TaskInfo';
-import Collapse from 'reactstrap/lib/Collapse';
+import Collapse from '../shared/Collapse';
 
 export default class TaskContainer extends React.Component {
   state = {
