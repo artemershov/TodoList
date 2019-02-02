@@ -5,7 +5,6 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 
 export default class TaskGroup extends React.Component {
-  submit = this.props.todoActions('add');
   render = () =>
     this.props.groups &&
     this.props.groups.map((el, idx) => (
@@ -14,13 +13,12 @@ export default class TaskGroup extends React.Component {
         <Card className="mb-4">
           {el.id && (
             <CardHeader className="px-3">
-              <TaskForm groupId={el.id} submit={this.submit} />
+              <TaskForm submit={this.props.todoActions(el.id)('add')} />
             </CardHeader>
           )}
           <TaskListContainer
-            groupId={el.id}
             list={el.list}
-            actions={this.props.todoActions}
+            actions={this.props.todoActions(el.id)}
           />
         </Card>
       </div>

@@ -4,11 +4,7 @@ import TaskListPlaceholder from './TaskListPlaceholder';
 
 const TaskListContainer = props =>
   props.list.length ? (
-    <TaskList
-      groupId={props.groupId}
-      list={props.list}
-      actions={props.actions}
-    />
+    <TaskList list={props.list} actions={props.actions} />
   ) : (
     <TaskListPlaceholder />
   );

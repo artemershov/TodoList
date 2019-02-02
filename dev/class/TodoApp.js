@@ -20,37 +20,33 @@ export default class TodoApp {
     if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
   }
 
-  todoActions(method, ...args) {
+  todoActions(method, groupId, ...args) {
+    const result = this.todo[method](...args);
     switch (method) {
       case 'add': {
-        const [data, groupId] = args;
-        const id = this.todo.add(data);
-        if (groupId) this.groups.itemAdd(groupId, id);
+        if (groupId) this.groups.itemAdd(groupId, result);
+        this.updateOrder();
         break;
       }
       case 'remove': {
-        const [id, groupId] = args;
-        this.todo.remove(id);
-        if (groupId) this.groups.itemRemove(groupId, id);
+        if (groupId) this.groups.itemRemove(groupId, ...args);
         break;
       }
       case 'removeDone': {
-        const ids = this.todo.removeDone();
         const groupOrder = this.groups.getOrder();
         const groupList = this.groups.getList();
         groupOrder.map(i => {
           const group = groupList[i];
-          pullAll(group.list, ids);
+          pullAll(group.list, result);
         });
         break;
       }
-      default: {
-        this.todo[method](...args);
+      case 'edit':
+      case 'check': {
+        this.updateOrder();
         break;
       }
     }
-    const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
-    if (methodsToUpdate.includes(method)) this.updateOrder();
     this.updateStorage();
   }
 

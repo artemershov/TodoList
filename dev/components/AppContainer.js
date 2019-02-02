@@ -5,7 +5,7 @@ import RemoveDoneBtn from './shared/RemoveDoneBtn';
 import Container from 'reactstrap/lib/Container';
 
 export default class AppContainer extends React.Component {
-  remove = this.props.todoActions('removeDone');
+  remove = this.props.todoActions(null)('removeDone');
   render = () => (
     <Fragment>
       <Header

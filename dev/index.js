@@ -12,8 +12,8 @@ class App extends React.Component {
     settings: {},
   };
 
-  todoActions = method => (...args) => {
-    TodoApp.todoActions(method, ...args);
+  todoActions = groupId => method => (...args) => {
+    TodoApp.todoActions(method, groupId, ...args);
     this.setState({ groups: TodoApp.getGroups() });
   };
 
