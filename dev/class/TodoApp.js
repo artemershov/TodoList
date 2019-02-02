@@ -3,7 +3,7 @@ import GroupList from './Groups';
 import SettingsClass, { filterParam, sortParam } from './Settings';
 import WebStorageClass from './WebStorage';
 import some from 'lodash/some';
-import difference from 'lodash/difference';
+import pullAll from 'lodash/pullAll';
 
 export default class TodoApp {
   constructor() {
@@ -34,9 +34,10 @@ export default class TodoApp {
         if (groupId) this.groups.itemRemove(groupId, id);
         break;
       }
-      default:
+      default: {
         this.todo[method](...args);
         break;
+      }
     }
     const methodsToUpdate = ['add', 'edit', 'check', 'remove', 'removeDone'];
     if (methodsToUpdate.includes(method)) this.updateOrder();
@@ -55,7 +56,6 @@ export default class TodoApp {
   }
 
   searchAction(query) {
-    let groups;
     if (query) {
       const regexp = new RegExp(query, 'gi');
       const list = this.todo
@@ -67,34 +67,35 @@ export default class TodoApp {
             some(task.subtasks.list, el => regexp.test(el.title)) ||
             some(task.comments.list, el => regexp.test(el.message))
         );
-      groups = [
+      return [
         {
           id: null,
           title: `Поиск: ${query}`,
           list,
         },
       ];
-    } else {
-      groups = this.getGroups();
     }
-    return groups;
+    return this.getGroups();
   }
 
   getGroups() {
+    const todoOrder = [...this.todo.getOrder()];
+    const groupsOrder = this.groups.getOrder();
     const taskList = this.todo.getList();
-    let taskOrder = this.todo.getOrder();
-    const groups = this.groups.getOrderedList().map(group => {
-      const list = taskOrder
-        .filter(i => group.list.includes(i))
+    const groupsList = this.groups.getList();
+    const groups = groupsOrder.map(groupId => {
+      const group = groupsList[groupId];
+      const list = todoOrder
+        .filter(taskId => group.list.includes(taskId))
         .map(taskId => taskList[taskId]);
-      taskOrder = difference(taskOrder, group.list);
+      pullAll(todoOrder, group.list);
       return { ...group, list };
     });
-    if (taskOrder.length) {
+    if (todoOrder.length) {
       groups.push({
         id: null,
         title: 'Без группы',
-        list: taskOrder.map(i => taskList[i]),
+        list: todoOrder.map(i => taskList[i]),
       });
     }
     this.updateStorage();
