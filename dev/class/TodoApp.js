@@ -34,6 +34,16 @@ export default class TodoApp {
         if (groupId) this.groups.itemRemove(groupId, id);
         break;
       }
+      case 'removeDone': {
+        const ids = this.todo.removeDone();
+        const groupOrder = this.groups.getOrder();
+        const groupList = this.groups.getList();
+        groupOrder.map(i => {
+          const group = groupList[i];
+          pullAll(group.list, ids);
+        });
+        break;
+      }
       default: {
         this.todo[method](...args);
         break;

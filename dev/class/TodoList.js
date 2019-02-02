@@ -45,7 +45,7 @@ export default class TodoList extends ExtendedList {
     const ids = filter(this.list, i => i && i.done).map(i => i.id);
     ids.map(i => (this.list[i] = undefined));
     pullAll(this.order, ids);
-    return ids.length;
+    return ids;
   }
 
   editDescription(id, data) {
