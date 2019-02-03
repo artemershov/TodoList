@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import SimpleForm from '../../shared/SimpleForm';
 import Comment from './Comment';
-import CommentPlaceholder from './CommentPlaceholder';
+import Placeholder from '../../shared/Placeholder';
 
 export default class Comments extends React.Component {
   handleSubmit = value => {
@@ -32,7 +32,10 @@ export default class Comments extends React.Component {
           />
         ))
       ) : (
-        <CommentPlaceholder />
+        <Placeholder
+          title="Нет коментариев"
+          description="Добавьте коментарий используя форму выше"
+        />
       )}
     </Fragment>
   );

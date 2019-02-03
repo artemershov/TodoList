@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import DescriptionForm from './DescriptionForm';
 import DescriptionText from './DescriptionText';
-import DescriptionPlaceholder from './DescriptionPlaceholder';
+import Placeholder from '../../shared/Placeholder';
 
 export default class Description extends React.Component {
   state = { formOpen: false };
@@ -25,7 +25,14 @@ export default class Description extends React.Component {
       ) : this.props.data ? (
         <DescriptionText data={this.props.data} edit={this.formToggle} />
       ) : (
-        <DescriptionPlaceholder action={this.formToggle} />
+        <Placeholder
+          title="Нет описания"
+          description="Нажмите на кнопку чтобы показать форму"
+          button={{
+            action: this.formToggle,
+            text: 'Добавить'
+          }}
+        />
       )}
     </Fragment>
   );

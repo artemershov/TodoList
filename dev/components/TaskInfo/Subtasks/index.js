@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import SimpleForm from '../../shared/SimpleForm';
 import SubtaskList from './SubtaskList';
-import SubtaskPlaceholder from './SubtaskPlaceholder';
+import Placeholder from '../../shared/Placeholder';
 
 export default class SubTasks extends React.Component {
   handleSubmit = value => {
@@ -20,7 +20,10 @@ export default class SubTasks extends React.Component {
           actions={this.props.actions}
         />
       ) : (
-        <SubtaskPlaceholder />
+        <Placeholder
+          title="Нет задач"
+          description="Добавьте задачи используя форму выше"
+        />
       )}
     </Fragment>
   );
