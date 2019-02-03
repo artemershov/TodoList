@@ -11,6 +11,7 @@ export default class TodoApp {
     this.groups = new GroupList();
     this.settings = new SettingsClass();
     this.storage = WebStorageClass('TodoList');
+    this.lastUpdate = {};
     if (this.storage && this.storage.get()) {
       const data = this.storage.get();
       this.todo.setData(data.todo || null);
@@ -47,6 +48,7 @@ export default class TodoApp {
         break;
       }
     }
+    this.lastUpdate[groupId] = Date.now();
     this.updateStorage();
   }
 
@@ -95,7 +97,9 @@ export default class TodoApp {
         .filter(taskId => group.list.includes(taskId))
         .map(taskId => taskList[taskId]);
       pullAll(todoOrder, group.list);
-      return { ...group, list };
+      if (!this.lastUpdate[group.id]) this.lastUpdate[group.id] = Date.now();
+      const lastUpdate = this.lastUpdate[group.id];
+      return { ...group, list, lastUpdate };
     });
     if (todoOrder.length) {
       groups.push({
@@ -119,6 +123,7 @@ export default class TodoApp {
       sort: sortParam[settings.sort].param,
       reverse: settings.reverse,
     });
+    Object.keys(this.lastUpdate).map(key => this.lastUpdate[key] = Date.now());
   }
 
   updateStorage() {
