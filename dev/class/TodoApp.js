@@ -48,7 +48,7 @@ export default class TodoApp {
         break;
       }
     }
-    this.lastUpdate[groupId] = Date.now();
+    if (groupId) this.lastUpdate[groupId] = Date.now();
     this.updateStorage();
   }
 
@@ -123,7 +123,9 @@ export default class TodoApp {
       sort: sortParam[settings.sort].param,
       reverse: settings.reverse,
     });
-    Object.keys(this.lastUpdate).map(key => this.lastUpdate[key] = Date.now());
+    Object.keys(this.lastUpdate).map(
+      key => (this.lastUpdate[key] = Date.now())
+    );
   }
 
   updateStorage() {

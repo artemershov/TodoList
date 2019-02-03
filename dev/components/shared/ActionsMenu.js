@@ -14,10 +14,10 @@ const ActionsMenu = props => (
       <FontAwesomeIcon icon={faEllipsisV} />
     </DropdownToggle>
     <DropdownMenu>
-      <DropdownItem onClick={props.actions.edit} data-id={props.id}>
+      <DropdownItem onClick={props.actions.edit}>
         <FontAwesomeIcon icon={faEdit} fixedWidth /> Редактировать
       </DropdownItem>
-      <DropdownItem onClick={props.actions.remove} data-id={props.id}>
+      <DropdownItem onClick={props.actions.remove}>
         <FontAwesomeIcon icon={faTrashAlt} fixedWidth /> Удалить
       </DropdownItem>
     </DropdownMenu>

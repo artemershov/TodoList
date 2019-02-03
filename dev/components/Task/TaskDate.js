@@ -3,7 +3,7 @@ import FormattedDate from '../shared/FormattedDate';
 
 const TaskDate = props => (
   <div className="text-muted small">
-    {props.done ? (
+    {props.date.done ? (
       <Fragment>
         Завершено: <FormattedDate date={props.date.done} />
       </Fragment>

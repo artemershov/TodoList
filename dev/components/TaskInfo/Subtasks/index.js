@@ -4,15 +4,14 @@ import SubtaskList from './SubtaskList';
 import Placeholder from '../../shared/Placeholder';
 
 export default class SubTasks extends React.Component {
-  handleSubmit = value => {
-    this.props.actions.add(this.props.id, value);
-  };
-
+  handleSubmit = value => this.props.actions.add(this.props.id, value);
   render = () => (
     <Fragment>
-      <div className="mb-3">
-        <SimpleForm submit={this.handleSubmit} placeholder="Название задачи" />
-      </div>
+      <SimpleForm
+        className="mb-3"
+        submit={this.handleSubmit}
+        placeholder="Название задачи"
+      />
       {this.props.data.order.length ? (
         <SubtaskList
           id={this.props.id}

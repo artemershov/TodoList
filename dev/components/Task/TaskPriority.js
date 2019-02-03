@@ -3,7 +3,7 @@ import Badge from 'reactstrap/lib/Badge';
 import { taskPriorities } from '../../class/Task';
 
 const TaskPriority = props => (
-  <Badge color={taskPriorities[props.level].color}>
+  <Badge className={props.className} color={taskPriorities[props.level].color}>
     {taskPriorities[props.level].title}
   </Badge>
 );

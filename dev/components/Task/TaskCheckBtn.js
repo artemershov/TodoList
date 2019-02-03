@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons/faCheckSquare';
 import { faSquare } from '@fortawesome/free-regular-svg-icons/faSquare';
 
-const CheckButton = props => (
-  <Button size="sm" color="link" onClick={props.onClick} data-id={props.id}>
+const TaskCheckBtn = props => (
+  <Button size="sm" color="link" onClick={props.onClick}>
     <FontAwesomeIcon
       className="lead"
       icon={props.done ? faCheckSquare : faSquare}
@@ -13,4 +13,4 @@ const CheckButton = props => (
   </Button>
 );
 
-export default CheckButton;
+export default TaskCheckBtn;

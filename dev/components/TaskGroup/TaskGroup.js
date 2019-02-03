@@ -6,6 +6,7 @@ import CardHeader from 'reactstrap/lib/CardHeader';
 
 export default class TaskGroup extends React.Component {
   shouldComponentUpdate = nextProps =>
+    !this.props.data.lastUpdate ||
     this.props.data.lastUpdate !== nextProps.data.lastUpdate;
   render = () => (
     <Fragment>

@@ -9,11 +9,7 @@ import Col from 'reactstrap/lib/Col';
 export default class DescriptionForm extends React.Component {
   state = { value: '' };
 
-  handleChange = e => {
-    const { value } = e.target;
-    this.setState({ value });
-  };
-
+  handleChange = e => this.setState({ value: e.target.value });
   handleSubmit = e => {
     e.preventDefault();
     this.props.submit(this.state.value);
@@ -21,9 +17,7 @@ export default class DescriptionForm extends React.Component {
   };
 
   componentDidMount = () => {
-    if (this.props.value) {
-      this.setState({ value: this.props.value });
-    }
+    if (this.props.value) this.setState({ value: this.props.value });
   };
 
   render = () => (
@@ -44,10 +38,8 @@ export default class DescriptionForm extends React.Component {
               Сохранить
             </Button>
           </Col>
-          <Col>
-            <div className="text-right text-muted small">
-              {this.state.value.length} / 2000 символов
-            </div>
+          <Col className="text-right text-muted small">
+            {this.state.value.length} / 2000 символов
           </Col>
         </Row>
       </FormGroup>

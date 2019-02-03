@@ -6,7 +6,11 @@ const Placeholder = props => (
     <h4>{props.title}</h4>
     {props.description && <div className="text-muted">{props.description}</div>}
     {props.button && (
-      <Button className="mt-3" outline color="secondary" onClick={props.button.action}>
+      <Button
+        className="mt-3"
+        outline
+        color="secondary"
+        onClick={props.button.action}>
         {props.button.text}
       </Button>
     )}

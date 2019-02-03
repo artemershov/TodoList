@@ -47,9 +47,11 @@ export default class TaskContainer extends React.Component {
   render = () => (
     <Fragment>
       {this.state.formOpen ? (
-        <div className="px-2">
-          <TaskForm data={this.props.data} submit={this.formSubmit} />
-        </div>
+        <TaskForm
+          className="px-2"
+          data={this.props.data}
+          submit={this.formSubmit}
+        />
       ) : (
         <Task data={this.props.data} actions={this.taskActions} />
       )}

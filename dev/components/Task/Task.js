@@ -1,31 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
-import CheckButton from '../shared/CheckButton';
+import TaskCheckBtn from './TaskCheckBtn';
+import TaskTitle from './TaskTitle';
 import ActionsMenu from '../shared/ActionsMenu';
-import TaskDate from './TaskDate';
-import TaskInfoStatus from './TaskInfoStatus';
-import TaskPriority from './TaskPriority';
 import WordBreaker from '../shared/WordBreaker';
-
-const Title = styled.div`
-  line-height: 1.2;
-  cursor: pointer;
-`;
 
 const Task = props => (
   <div className="d-flex align-items-center">
     <div>
-      <CheckButton onClick={props.actions.check} done={props.data.done} />
+      <TaskCheckBtn onClick={props.actions.check} done={props.data.done} />
     </div>
-    <Title className="flex-fill px-2" onClick={props.actions.info}>
-      <WordBreaker className="font-weight-bold">{props.data.title}</WordBreaker>
-      <TaskDate date={props.data.date} done={props.data.done} />
-    </Title>
-    <TaskInfoStatus data={props.data} />
-    {Boolean(Number(props.data.priority)) && (
-      <div className="px-2">
-        <TaskPriority level={props.data.priority} />
-      </div>
+    {props.sub ? (
+      <WordBreaker className="flex-fill px-2">{props.data.title}</WordBreaker>
+    ) : (
+      <TaskTitle data={props.data} action={props.actions.info} />
     )}
     <div>
       <ActionsMenu actions={props.actions} />

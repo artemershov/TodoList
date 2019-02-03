@@ -6,28 +6,29 @@ import Button from 'reactstrap/lib/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 
-const Comment = props => (
-  <div className="px-3 py-2 mb-3 border rounded bg-light">
-    <div className="d-flex align-items-center">
-      <div className="flex-fill">
-        <WordBreaker>
-          <FormattedText text={props.data.message} />
-        </WordBreaker>
-        <div className="text-muted small">
-          <FormattedDate date={props.data.date} />
+export default class Comment extends React.Component {
+  remove = () => {
+    if (confirm('Вы точно хотите удалить данный комментарий?')) {
+      this.props.remove(this.props.id, this.props.data.id);
+    }
+  };
+  render = () => (
+    <div className="px-3 py-2 mb-3 border rounded bg-light">
+      <div className="d-flex align-items-center">
+        <div className="flex-fill">
+          <WordBreaker>
+            <FormattedText text={this.props.data.message} />
+          </WordBreaker>
+          <div className="text-muted small">
+            <FormattedDate date={this.props.data.date} />
+          </div>
+        </div>
+        <div>
+          <Button close style={{ fontSize: 16 }} onClick={this.remove}>
+            <FontAwesomeIcon icon={faTimes} />
+          </Button>
         </div>
       </div>
-      <div>
-        <Button
-          close
-          style={{ fontSize: 16 }}
-          data-id={props.data.id}
-          onClick={props.remove}>
-          <FontAwesomeIcon icon={faTimes} />
-        </Button>
-      </div>
     </div>
-  </div>
-);
-
-export default Comment;
+  );
+}

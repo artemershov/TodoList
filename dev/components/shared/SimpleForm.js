@@ -30,7 +30,7 @@ export default class SimpleForm extends React.Component {
   };
 
   render = () => (
-    <Form onSubmit={this.handleSubmit}>
+    <Form className={this.props.className} onSubmit={this.handleSubmit}>
       <div className="d-flex">
         <div className="flex-fill pr-2">
           <Input

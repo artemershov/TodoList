@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'reactstrap/lib/Button';
 import FormattedText from '../../shared/FormattedText';
 
 const DescriptionText = props => (
@@ -6,9 +7,9 @@ const DescriptionText = props => (
     <div className="mb-2">
       <FormattedText text={props.data} />
     </div>
-    <a href="#" onClick={props.edit}>
+    <Button className="p-0" color="link" onClick={props.edit}>
       Редактировать
-    </a>
+    </Button>
   </div>
 );
 

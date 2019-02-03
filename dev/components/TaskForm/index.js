@@ -55,35 +55,35 @@ export default class TaskForm extends React.Component {
     }
   };
   render = () => (
-    <Form onSubmit={this.handleSubmit}>
-      <div className="d-flex">
-        <div className="flex-fill">
-          <Input
-            data-prop="title"
-            onChange={this.handleChange}
-            value={this.state.title}
-            maxLength="200"
-            required
-            placeholder="Название задачи"
-          />
-        </div>
-        <div className="px-2">
-          <TaskFormPriorities
-            value={this.state.priority}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="pr-2">
-          <TaskFormDate
-            date={this.state.deadline}
-            onChange={this.handleDatapicker}
-          />
-        </div>
-        <div>
-          <Button outline color="secondary">
-            <FontAwesomeIcon icon={faCheck} fixedWidth />
-          </Button>
-        </div>
+    <Form
+      className={['d-flex', this.props.className].join(' ')}
+      onSubmit={this.handleSubmit}>
+      <div className="flex-fill">
+        <Input
+          data-prop="title"
+          onChange={this.handleChange}
+          value={this.state.title}
+          maxLength="200"
+          required
+          placeholder="Название задачи"
+        />
+      </div>
+      <div className="px-2">
+        <TaskFormPriorities
+          value={this.state.priority}
+          onChange={this.handleChange}
+        />
+      </div>
+      <div className="pr-2">
+        <TaskFormDate
+          date={this.state.deadline}
+          onChange={this.handleDatapicker}
+        />
+      </div>
+      <div>
+        <Button outline color="secondary">
+          <FontAwesomeIcon icon={faCheck} fixedWidth />
+        </Button>
       </div>
     </Form>
   );
