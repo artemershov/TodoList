@@ -1,7 +1,7 @@
-import compact from 'lodash/compact';
 import filter from 'lodash/filter';
-import pull from 'lodash/pull';
+import omit from 'lodash/omit';
 import orderBy from 'lodash/orderBy';
+import without from 'lodash/without';
 
 class SimpleList {
   constructor() {
@@ -18,11 +18,11 @@ class List extends SimpleList {
   }
 
   getList() {
-    return this.list;
+    return { ...this.list };
   }
 
   getOrder() {
-    return this.order;
+    return [...this.order];
   }
 
   getLastId() {
@@ -31,9 +31,9 @@ class List extends SimpleList {
 
   getData() {
     return {
-      list: this.list,
-      order: this.order,
-      lastId: this.lastId,
+      list: this.getList(),
+      order: this.getOrder(),
+      lastId: this.getLastId(),
     };
   }
 
@@ -49,18 +49,20 @@ class List extends SimpleList {
     this.lastId = id;
   }
 
-  setData(data) {
-    this.list = data.list;
-    this.order = data.order;
-    this.lastId = data.lastId;
+  setData({ list = null, order = null, lastId = null }) {
+    if (list) this.list = list;
+    if (order) this.order = order;
+    if (lastId) this.lastId = lastId;
   }
 
   add(data) {
-    return listAdd(this, data);
+    this.setData(listAdd(this, data));
+    return this.getLastId();
   }
 
   remove(id) {
-    return listRemove(this, id);
+    this.setData(listRemove(this, id));
+    return id;
   }
 }
 
@@ -70,45 +72,47 @@ export default class ExtendedList extends List {
   }
 
   getOrderedList() {
-    return this.order.map(i => i && this.list[i]);
+    return this.order.map(i => this.list[i]);
   }
 
   updateOrder(param) {
-    return listUpdateOrder(this, param);
+    this.setData(listUpdateOrder(this, param));
+    return this.getOrder();
   }
 }
 
-const listAdd = (list, data) => {
-  list.lastId++;
-  list.list[list.lastId] = data;
-  list.order.unshift(list.lastId);
-  return list.lastId;
+const listAdd = (context, data) => {
+  const lastId = context.lastId + 1;
+  const list = { ...context.list, [lastId]: data };
+  const order = [lastId, ...context.order];
+  return { list, order, lastId };
 };
 
-const listRemove = (list, id) => {
-  list.list[id] = undefined;
-  pull(list.order, id);
-  return 1;
+const listRemove = (context, id) => {
+  const lastId = context.lastId;
+  const list = omit(context.list, id);
+  const order = without(context.order, id);
+  return { list, order, lastId };
 };
 
-const listSort = (list, param, reverse = false) => {
-  list.order = compact(orderBy(list.list, ...param).map(i => i && i.id));
-  if (reverse) list.order.reverse();
-  return list.order;
+const listSort = (context, param, reverse = false) => {
+  const order = orderBy(context.list, ...param).map(i => i.id);
+  if (reverse) order.reverse();
+  return { order };
 };
 
-const listFilter = (list, param) => {
-  list.order = filter(list.list, param).map(i => i && i.id);
-  return list.order;
+const listFilter = (context, param) => {
+  const order = filter(context.list, param).map(i => i.id);
+  return { order };
 };
 
-const listUpdateOrder = (list, param) => {
-  let tempList = list.list;
+const listUpdateOrder = (context, param) => {
+  let tempList = context.list;
   if (param.filter) tempList = filter(tempList, param.filter);
   if (param.sort) tempList = orderBy(tempList, ...param.sort);
   if (param.reverse) tempList.reverse();
-  list.order = compact(tempList.map(i => i && i.id));
-  return list.order;
+  const order = tempList.map(i => i.id);
+  return { order };
 };
 
 export {

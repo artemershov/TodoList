@@ -1,5 +1,5 @@
 import ExtendedList from './List';
-import pull from 'lodash/pull';
+import without from 'lodash/without';
 
 class Group {
   constructor(id, title, list = []) {
@@ -20,19 +20,23 @@ export default class GroupList extends ExtendedList {
   }
 
   edit(id, title) {
-    this.list[id].title = title;
+    const group = this.list[id];
+    this.setList({ ...this.list, [id]: { ...group, title } });
+    return id;
   }
 
   itemAdd(groupId, id) {
     const group = this.list[groupId];
-    group.list.push(id);
+    const list = [...group.list, id];
+    this.setList({ ...this.list, [groupId]: { ...group, list } });
     return id;
   }
 
   itemRemove(groupId, id) {
     const group = this.list[groupId];
-    pull(group.list, id);
-    return 1;
+    const list = without(group.list, id);
+    this.setList({ ...this.list, [groupId]: { ...group, list } });
+    return id;
   }
 }
 

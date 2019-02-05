@@ -2,8 +2,9 @@ import TodoList from './TodoList';
 import GroupList from './Groups';
 import SettingsClass, { filterParam, sortParam } from './Settings';
 import WebStorageClass from './WebStorage';
-import some from 'lodash/some';
+import intersection from 'lodash/intersection';
 import pullAll from 'lodash/pullAll';
+import some from 'lodash/some';
 
 export default class TodoApp {
   constructor() {
@@ -11,7 +12,7 @@ export default class TodoApp {
     this.groups = new GroupList();
     this.settings = new SettingsClass();
     this.storage = WebStorageClass('TodoList');
-    this.lastUpdate = {};
+    this.cache = {};
     if (this.storage && this.storage.get()) {
       const data = this.storage.get();
       this.todo.setData(data.todo || null);
@@ -34,12 +35,10 @@ export default class TodoApp {
         break;
       }
       case 'removeDone': {
-        const groupOrder = this.groups.getOrder();
-        const groupList = this.groups.getList();
-        groupOrder.map(i => {
-          const group = groupList[i];
-          pullAll(group.list, result);
-        });
+        const order = this.groups.getOrder();
+        const list = this.groups.getList();
+        order.map(i => pullAll(list[i].list, result));
+        this.groups.setList(list);
         break;
       }
       case 'edit':
@@ -48,7 +47,7 @@ export default class TodoApp {
         break;
       }
     }
-    if (groupId) this.lastUpdate[groupId] = Date.now();
+    if (groupId) this.cache[groupId].lastUpdate = Date.now();
     this.updateStorage();
   }
 
@@ -87,18 +86,22 @@ export default class TodoApp {
   }
 
   getGroups() {
-    const todoOrder = [...this.todo.getOrder()];
+    const todoOrder = this.todo.getOrder();
     const groupsOrder = this.groups.getOrder();
     const taskList = this.todo.getList();
     const groupsList = this.groups.getList();
     const groups = groupsOrder.map(groupId => {
       const group = groupsList[groupId];
-      const list = todoOrder
-        .filter(taskId => group.list.includes(taskId))
-        .map(taskId => taskList[taskId]);
+      const order = intersection(todoOrder, group.list);
+      const list = order.map(i => taskList[i]);
+      if (
+        !this.cache[groupId] ||
+        this.cache[groupId].order.join() !== order.join()
+      ) {
+        this.cache[groupId] = { order, lastUpdate: Date.now() };
+      }
+      const lastUpdate = this.cache[groupId].lastUpdate;
       pullAll(todoOrder, group.list);
-      if (!this.lastUpdate[group.id]) this.lastUpdate[group.id] = Date.now();
-      const lastUpdate = this.lastUpdate[group.id];
       return { ...group, list, lastUpdate };
     });
     if (todoOrder.length) {
@@ -123,9 +126,6 @@ export default class TodoApp {
       sort: sortParam[settings.sort].param,
       reverse: settings.reverse,
     });
-    Object.keys(this.lastUpdate).map(
-      key => (this.lastUpdate[key] = Date.now())
-    );
   }
 
   updateStorage() {
