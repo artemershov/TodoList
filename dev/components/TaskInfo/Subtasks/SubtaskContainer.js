@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleForm from '../../shared/SimpleForm';
 import Task from '../../Task/Task';
 
-export default class SubtaskList extends React.Component {
+export default class SubtaskContainer extends React.Component {
   state = { formOpen: false };
 
   formToggle = () => this.setState({ formOpen: !this.state.formOpen });
