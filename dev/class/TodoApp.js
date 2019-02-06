@@ -2,7 +2,9 @@ import TodoList from './TodoList';
 import GroupList from './Groups';
 import SettingsClass, { filterParam, sortParam } from './Settings';
 import WebStorageClass from './WebStorage';
+import difference from 'lodash/difference';
 import intersection from 'lodash/intersection';
+import omit from 'lodash/omit';
 import pullAll from 'lodash/pullAll';
 import some from 'lodash/some';
 
@@ -52,7 +54,28 @@ export default class TodoApp {
   }
 
   groupsActions(method, ...args) {
-    this.groups[method](...args);
+    switch (method) {
+      case 'edit': {
+        const [id, title] = args;
+        this.groups.edit(id, title);
+        this.cache[id].lastUpdate = Date.now();
+        break;
+      }
+      case 'remove': {
+        const id = args[0];
+        const groupList = this.groups.getList()[id].list;
+        const list = omit(this.todo.getList(), groupList);
+        const order = difference(this.todo.getOrder(), groupList);
+        this.todo.setData({ list, order });
+        this.groups.remove(id);
+        if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
+        break;
+      }
+      default: {
+        this.groups[method](...args);
+        break;
+      }
+    }
     this.updateStorage();
   }
 
