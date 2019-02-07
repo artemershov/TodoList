@@ -16,8 +16,12 @@ export default class Header extends React.Component {
   searchHandler = e => {
     const search = e.target.value;
     this.setState({ search });
-    this.props.actions.searchAction(search);
+    this.props.actions.search(search);
   };
+
+  showGroups = () => this.props.actions.showSidebar('groups');
+  showSettings = () => this.props.actions.showSidebar('settings');
+  showProfile = () => this.props.actions.showSidebar('profile');
 
   render = () => (
     <div className="position-fixed fixed-top py-2 bg-light border-bottom shadow">
@@ -35,13 +39,13 @@ export default class Header extends React.Component {
             />
           </Col>
           <Col xs="6" sm="4" md="3" className="text-right">
-            <Button color="link" onClick={this.props.actions.groups}>
+            <Button color="link" onClick={this.showGroups}>
               <FontAwesomeIcon icon={faFolder} fixedWidth />
             </Button>
-            <Button color="link" onClick={this.props.actions.settings}>
+            <Button color="link" onClick={this.showSettings}>
               <FontAwesomeIcon icon={faCog} fixedWidth />
             </Button>
-            <Button color="link" onClick={this.props.actions.profile}>
+            <Button color="link" onClick={this.showProfile}>
               <FontAwesomeIcon icon={faUser} fixedWidth />
             </Button>
           </Col>

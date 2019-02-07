@@ -10,10 +10,10 @@ export default class TaskGroup extends React.Component {
     this.props.data.lastUpdate !== nextProps.data.lastUpdate;
   render = () => (
     <Fragment>
-      <h1 className="display-3 text-white text-center my-4">
+      <h1 className="display-4 text-white text-center my-4">
         {this.props.data.title}
       </h1>
-      <Card className="mb-4">
+      <Card className="mb-4 shadow">
         {this.props.data.id && (
           <CardHeader className="px-3">
             <TaskForm submit={this.props.actions('add')} />

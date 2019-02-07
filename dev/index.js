@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoAppClass from './class/TodoApp';
-import AppContainer from './components/AppContainer';
+import Layout from './components/Layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TodoApp = new TodoAppClass();
@@ -42,7 +42,7 @@ class App extends React.Component {
   };
 
   render = () => (
-    <AppContainer
+    <Layout
       searchAction={this.searchAction}
       todoActions={this.todoActions}
       groups={this.state.groups}

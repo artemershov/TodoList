@@ -10,7 +10,11 @@ export default class RemoveDoneBtn extends React.Component {
     }
   };
   render = () => (
-    <Button outline color="light" onClick={this.removeDone}>
+    <Button
+      className={this.props.className}
+      outline
+      color="light"
+      onClick={this.removeDone}>
       <FontAwesomeIcon icon={faTrashAlt} /> Удалить завершенные задачи
     </Button>
   );
