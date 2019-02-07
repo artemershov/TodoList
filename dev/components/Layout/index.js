@@ -80,8 +80,7 @@ export default class Layout extends React.Component {
         <Container className="pt-5">
           <TaskGroup
             todoActions={this.props.todoActions}
-            groups={this.props.groups}
-            groupsActions={this.props.groupsActions}
+            groups={this.props.searchResults || this.props.groups}
           />
           <RemoveDoneBtn
             className="d-block mx-auto mb-4"

@@ -10,11 +10,13 @@ class App extends React.Component {
   state = {
     groups: [],
     settings: {},
+    searchQuery: null,
+    searchResults: null,
   };
 
   todoActions = groupId => method => (...args) => {
     TodoApp.todoActions(method, groupId, ...args);
-    this.setState({ groups: TodoApp.getGroups() });
+    this.searchAction(this.state.searchQuery);
   };
 
   groupsActions = method => (...args) => {
@@ -31,7 +33,18 @@ class App extends React.Component {
   };
 
   searchAction = query => {
-    this.setState({ groups: TodoApp.searchAction(query) });
+    if (query) {
+      this.setState({
+        searchQuery: query,
+        searchResults: TodoApp.searchAction(query)
+      });
+    } else {
+      this.setState({
+        groups: TodoApp.getGroups(),
+        searchQuery: null,
+        searchResults: null,
+      });
+    }
   };
 
   componentDidMount = () => {
@@ -43,6 +56,7 @@ class App extends React.Component {
 
   render = () => (
     <Layout
+      searchResults={this.state.searchResults}
       searchAction={this.searchAction}
       todoActions={this.todoActions}
       groups={this.state.groups}
