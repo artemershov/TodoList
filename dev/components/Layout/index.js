@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
 import Header from '../Header';
 import TaskGroup from '../TaskGroup';
-import Sidebar from './Sidebar';
-import Groups from '../Groups';
-import Settings from './Settings';
-import Profile from './Profile';
+import Sidebar from '../Sidebar';
 import RemoveDoneBtn from '../shared/RemoveDoneBtn';
 import Container from 'reactstrap/lib/Container';
 
@@ -35,40 +32,6 @@ export default class Layout extends React.Component {
   };
 
   render = () => {
-    const sidebar = (contentType => {
-      switch (contentType) {
-        case 'groups':
-          return {
-            title: 'Редактор групп',
-            content: (
-              <Groups
-                groups={this.props.groups}
-                actions={this.props.groupsActions}
-              />
-            ),
-          };
-        case 'settings':
-          return {
-            title: 'Настройки',
-            content: (
-              <Settings
-                settings={this.props.settings}
-                actions={this.props.settingsActions}
-              />
-            ),
-          };
-        case 'profile':
-          return {
-            title: 'Аккаунт',
-            content: <Profile />,
-          };
-        default:
-          return {
-            title: null,
-            content: null,
-          };
-      }
-    })(this.state.sidebarContent);
     return (
       <Fragment>
         <Header
@@ -90,9 +53,14 @@ export default class Layout extends React.Component {
         <Sidebar
           isOpen={this.state.sidebarIsOpen}
           toggle={this.hideSidebar}
-          title={sidebar.title}>
-          {sidebar.content}
-        </Sidebar>
+          content={this.state.sidebarContent}
+          groups={this.props.groups}
+          groupsActions={this.props.groupsActions}
+          settings={this.props.settings}
+          settingsActions={this.props.settingsActions}
+          styles={this.props.styles}
+          stylesActions={this.props.stylesActions}
+        />
       </Fragment>
     );
   };

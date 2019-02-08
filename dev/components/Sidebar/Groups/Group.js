@@ -1,6 +1,6 @@
 import React from 'react';
-import ActionsMenu from '../shared/ActionsMenu';
-import WordBreaker from '../shared/WordBreaker';
+import ActionsMenu from '../../shared/ActionsMenu';
+import WordBreaker from '../../shared/WordBreaker';
 
 const Group = props => (
   <div className="d-flex align-items-center">

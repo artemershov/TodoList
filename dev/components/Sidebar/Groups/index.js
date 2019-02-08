@@ -3,7 +3,7 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import ListGroup from 'reactstrap/lib/ListGroup';
 import ListGroupItem from 'reactstrap/lib/ListGroupItem';
-import SimpleForm from '../shared/SimpleForm';
+import SimpleForm from '../../shared/SimpleForm';
 import GroupContainer from './GroupContainer';
 
 export default class Groups extends React.Component {

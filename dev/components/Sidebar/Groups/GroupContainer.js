@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleForm from '../shared/SimpleForm';
+import SimpleForm from '../../shared/SimpleForm';
 import Group from './Group';
 
 export default class GroupContainer extends React.Component {
