@@ -1,6 +1,7 @@
 import TodoList from './TodoList';
 import GroupList from './Groups';
-import SettingsClass, { filterParam, sortParam } from './Settings';
+import Settings, { filterParam, sortParam } from './Settings';
+import Styles from './Styles';
 import WebStorageClass from './WebStorage';
 import difference from 'lodash/difference';
 import intersection from 'lodash/intersection';
@@ -12,7 +13,8 @@ export default class TodoApp {
   constructor() {
     this.todo = new TodoList();
     this.groups = new GroupList();
-    this.settings = new SettingsClass();
+    this.settings = new Settings();
+    this.styles = new Styles();
     this.storage = WebStorageClass('TodoList');
     this.cache = {};
     if (this.storage && this.storage.get()) {
@@ -20,6 +22,7 @@ export default class TodoApp {
       this.todo.setData(data.todo || null);
       this.groups.setData(data.groups || null);
       this.settings.setData(data.settings || null);
+      this.styles.setData(data.styles || null);
     }
     if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
   }
@@ -80,8 +83,14 @@ export default class TodoApp {
   }
 
   settingsActions(method, ...args) {
-    this.settings[method](...args);
+    const result = this.settings[method](...args);
     this.updateOrder();
+    this.updateStorage();
+    return result;
+  }
+
+  stylesActions(method, ...args) {
+    this.styles[method](...args);
     this.updateStorage();
   }
 
@@ -142,6 +151,10 @@ export default class TodoApp {
     return this.settings.getData();
   }
 
+  getStyles() {
+    return this.styles.getData();
+  }
+
   updateOrder() {
     const settings = this.settings.getData();
     this.todo.updateOrder({
@@ -157,6 +170,7 @@ export default class TodoApp {
         todo: this.todo.getData(),
         groups: this.groups.getData(),
         settings: this.settings.getData(),
+        styles: this.styles.getData(),
       });
     }
   }

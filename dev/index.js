@@ -32,6 +32,12 @@ class App extends React.Component {
     });
   };
 
+  stylesActions = method => (...args) => {
+    TodoApp.stylesActions(method, ...args);
+    this.setState({ styles: TodoApp.getStyles() });
+    TodoApp.stylesActions('updateStyle');
+  };
+
   searchAction = query => {
     if (query) {
       this.setState({
@@ -51,7 +57,9 @@ class App extends React.Component {
     this.setState({
       groups: TodoApp.getGroups(),
       settings: TodoApp.getSettings(),
+      styles: TodoApp.getStyles(),
     });
+    TodoApp.stylesActions('updateStyle');
   };
 
   render = () => (
@@ -63,6 +71,8 @@ class App extends React.Component {
       groupsActions={this.groupsActions}
       settings={this.state.settings}
       settingsActions={this.settingsActions}
+      styles={this.state.styles}
+      stylesActions={this.stylesActions}
     />
   );
 }
