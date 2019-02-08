@@ -17,13 +17,7 @@ export default class TodoApp {
     this.styles = new Styles();
     this.storage = WebStorageClass('TodoList');
     this.cache = {};
-    if (this.storage && this.storage.get()) {
-      const data = this.storage.get();
-      this.todo.setData(data.todo || null);
-      this.groups.setData(data.groups || null);
-      this.settings.setData(data.settings || null);
-      this.styles.setData(data.styles || null);
-    }
+    if (this.storage && this.storage.get()) this.setData(this.storage.get());
     if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
   }
 
@@ -155,6 +149,22 @@ export default class TodoApp {
     return this.styles.getData();
   }
 
+  getData() {
+    return {
+      todo: this.todo.getData(),
+      groups: this.groups.getData(),
+      settings: this.settings.getData(),
+      styles: this.styles.getData(),
+    };
+  }
+
+  setData({ todo = null, groups = null, settings = null, styles = null }) {
+    this.todo.setData(todo);
+    this.groups.setData(groups);
+    this.settings.setData(settings);
+    this.styles.setData(styles);
+  }
+
   updateOrder() {
     const settings = this.settings.getData();
     this.todo.updateOrder({
@@ -165,13 +175,6 @@ export default class TodoApp {
   }
 
   updateStorage() {
-    if (this.storage) {
-      this.storage.set({
-        todo: this.todo.getData(),
-        groups: this.groups.getData(),
-        settings: this.settings.getData(),
-        styles: this.styles.getData(),
-      });
-    }
+    if (this.storage) this.storage.set(this.getData());
   }
 }
