@@ -42,10 +42,10 @@ export default class Settings {
     this.reverse = data;
   }
 
-  setData(data) {
-    this.filter = data.filter;
-    this.sort = data.sort;
-    this.reverse = data.reverse;
+  setData({ filter = 0, sort = 0, reverse = false }) {
+    this.filter = filter;
+    this.sort = sort;
+    this.reverse = reverse;
   }
 }
 

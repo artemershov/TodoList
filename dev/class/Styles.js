@@ -3,7 +3,7 @@ const bgColors = colors.map(i => 'bg-' + i);
 
 const defaultStyle = {
   url: '',
-  color: '',
+  color: 'primary',
   strech: true,
 };
 
@@ -27,11 +27,10 @@ export default class Styles {
   setBgStrech(data) {
     this.strech = data;
   }
-  setData(data) {
-    const { url, color, strech } = data;
-    if (url) this.url = url;
-    if (color) this.color = color;
-    if (strech) this.strech = strech;
+  setData({ url = '', color = 'primary', strech = true }) {
+    this.url = url;
+    this.color = color;
+    this.strech = strech;
   }
   updateStyle() {
     const body = document.body;
