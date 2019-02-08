@@ -11,10 +11,7 @@ const SidebarContainer = props => {
         return {
           title: 'Редактор групп',
           content: (
-            <Groups
-              groups={props.groups}
-              actions={props.groupsActions}
-            />
+            <Groups groups={props.groups} actions={props.groupsActions} />
           ),
         };
       case 'settings':
@@ -42,10 +39,7 @@ const SidebarContainer = props => {
     }
   })(props.content);
   return (
-    <Sidebar
-      isOpen={props.isOpen}
-      toggle={props.toggle}
-      title={sidebar.title}>
+    <Sidebar isOpen={props.isOpen} toggle={props.toggle} title={sidebar.title}>
       {sidebar.content}
     </Sidebar>
   );

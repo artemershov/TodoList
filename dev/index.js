@@ -42,7 +42,7 @@ class App extends React.Component {
     if (query) {
       this.setState({
         searchQuery: query,
-        searchResults: TodoApp.searchAction(query)
+        searchResults: TodoApp.searchAction(query),
       });
     } else {
       this.setState({

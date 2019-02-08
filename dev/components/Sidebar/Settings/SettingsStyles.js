@@ -11,8 +11,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 export default class SettingsList extends React.Component {
   setBgUrl = e => this.props.actions('setBgUrl')(e.target.value);
   setBgStrech = e => this.props.actions('setBgStrech')(e.target.checked);
-  setBgColor = e =>
-    this.props.actions('setBgColor')(e.currentTarget.value);
+  setBgColor = e => this.props.actions('setBgColor')(e.currentTarget.value);
   render = () => (
     <Fragment>
       <FormGroup>
