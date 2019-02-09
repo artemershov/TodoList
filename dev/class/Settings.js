@@ -50,14 +50,17 @@ export default class Settings {
 }
 
 const sortParam = {
-  list: [0, 1, 2, 3],
+  list: [0, 1, 2],
   reverse: {
     title: 'В обратном порядке',
     param: false,
   },
   '0': {
-    title: 'По статусу',
-    param: [['date.done', 'date.add', 'done'], ['desc', 'desc', 'asc']],
+    title: 'По дедлайну',
+    param: [
+      ['done', 'date.deadline', 'date.done', 'date.add'],
+      ['asc', 'asc', 'desc', 'desc'],
+    ],
   },
   '1': {
     title: 'По дате создания',
@@ -66,15 +69,8 @@ const sortParam = {
   '2': {
     title: 'По приоритету',
     param: [
-      ['priority', 'date.done', 'date.add', 'done'],
-      ['desc', 'desc', 'desc', 'asc'],
-    ],
-  },
-  '3': {
-    title: 'По дедлайну',
-    param: [
-      ['date.deadline', 'date.done', 'date.add', 'done'],
-      ['asc', 'desc', 'desc', 'asc'],
+      ['priority', 'done', 'date.deadline', 'date.done', 'date.add'],
+      ['desc', 'asc', 'asc', 'desc', 'desc'],
     ],
   },
 };
