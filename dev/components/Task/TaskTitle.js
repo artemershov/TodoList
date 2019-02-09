@@ -1,26 +1,30 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import TaskDate from './TaskDate';
 import TaskInfoStatus from './TaskInfoStatus';
 import TaskPriority from './TaskPriority';
-import WordBreaker from '../shared/WordBreaker';
 
 const Title = styled.div`
-  line-height: 1.2;
+  line-height: 1.1;
   cursor: pointer;
+  @media (min-width: 576px) {
+    line-height: 1.2;
+  }
 `;
 
 const TaskTitle = props => (
-  <Fragment>
-    <Title className="flex-fill px-2" onClick={props.action}>
-      <WordBreaker className="font-weight-bold">{props.data.title}</WordBreaker>
+  <div className="d-sm-flex flex-fill px-2 px-sm-0">
+    <Title className="px-sm-2 mb-1 mb-sm-0 flex-fill" onClick={props.action}>
+      <div className="mb-1 mb-sm-0 font-weight-bold">{props.data.title}</div>
       <TaskDate date={props.data.date} />
     </Title>
-    <TaskInfoStatus data={props.data} />
-    {Boolean(Number(props.data.priority)) && (
-      <TaskPriority className="mx-2" level={props.data.priority} />
-    )}
-  </Fragment>
+    <div className="d-flex align-items-center flex-row-reverse flex-sm-row justify-content-end justify-content-sm-start">
+      <TaskInfoStatus data={props.data} />
+      {Boolean(Number(props.data.priority)) && (
+        <TaskPriority className="mr-2" level={props.data.priority} />
+      )}
+    </div>
+  </div>
 );
 
 export default TaskTitle;

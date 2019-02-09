@@ -24,7 +24,7 @@ export default class Header extends React.Component {
   showProfile = () => this.props.actions.showSidebar('profile');
 
   render = () => (
-    <div className="position-fixed fixed-top py-2 bg-light border-bottom shadow">
+    <div className="position-fixed fixed-top py-2 bg-light shadow">
       <Container>
         <Row noGutters>
           <Col xs="6" sm="4" md="3">
