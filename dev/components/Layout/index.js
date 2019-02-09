@@ -23,14 +23,6 @@ export default class Layout extends React.Component {
 
   removeDone = this.props.todoActions(null)('removeDone');
 
-  onEscape = e => e.key == 'Escape' && this.hideSidebar();
-  componentDidMount = () => {
-    document.body.addEventListener('keyup', this.onEscape);
-  };
-  componentWillUnmount = () => {
-    document.body.removeEventListener('keyup', this.onEscape);
-  };
-
   render = () => {
     return (
       <Fragment>
