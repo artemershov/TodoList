@@ -17,7 +17,7 @@ const TaskTitle = props => (
     <Title className="px-sm-2 mb-2 mb-sm-0 flex-fill" onClick={props.action}>
       <div className="mb-1 mb-sm-0 font-weight-bold">{props.data.title}</div>
       <TaskDate
-        className={!props.data.date.deadline && 'd-none d-sm-block'}
+        className={!props.data.date.deadline ? 'd-none d-sm-block' : undefined}
         date={props.data.date}
       />
     </Title>
