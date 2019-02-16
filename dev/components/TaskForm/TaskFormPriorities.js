@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from 'reactstrap/lib/Input';
-import { taskPriorities } from '../../class/Task';
+import taskPriorities from '../../class/Task/param/taskPriorities';
 
 const TaskFormPriorities = props => (
   <Input

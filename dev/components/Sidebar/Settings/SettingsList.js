@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { sortParam, filterParam } from '../../../class/Settings';
+import sortParam from '../../../class/Settings/param/sortParam';
+import filterParam from '../../../class/Settings/param/filterParam';
 import FormGroup from 'reactstrap/lib/FormGroup';
 import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';

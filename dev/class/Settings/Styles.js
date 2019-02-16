@@ -1,11 +1,5 @@
-const colors = ['primary', 'info', 'success', 'warning', 'danger', 'dark'];
-const bgColors = colors.map(i => 'bg-' + i);
-
-const defaultStyle = {
-  url: '',
-  color: 'primary',
-  strech: true,
-};
+import defaultStyle from './param/defaultStyle';
+import { bgColors } from './param/colors';
 
 export default class Styles {
   constructor(data = null) {
@@ -27,7 +21,7 @@ export default class Styles {
   setBgStrech(data) {
     this.strech = data;
   }
-  setData({ url = '', color = 'primary', strech = true }) {
+  setData({ url, color, strech } = defaultStyle) {
     this.url = url;
     this.color = color;
     this.strech = strech;

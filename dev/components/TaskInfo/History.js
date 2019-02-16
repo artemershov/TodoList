@@ -1,6 +1,6 @@
 import React from 'react';
 import FormattedDate from '../shared/FormattedDate';
-import { taskEventCodes } from '../../class/Task';
+import taskEventCodes from '../../class/Task/param/taskEventCodes';
 
 const History = props =>
   props.data.order.map(i => (

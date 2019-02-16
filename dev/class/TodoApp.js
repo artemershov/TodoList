@@ -1,8 +1,10 @@
-import TodoList from './TodoList';
-import GroupList from './Groups';
-import Settings, { filterParam, sortParam } from './Settings';
-import Styles from './Styles';
-import WebStorageClass from './WebStorage';
+import TaskList from './Task/TaskList';
+import GroupList from './Group/GroupList';
+import ListSettings from './Settings/ListSettings';
+import Styles from './Settings/Styles';
+import filterParam from './Settings/param/filterParam';
+import sortParam from './Settings/param/sortParam';
+import WebStorageClass from './Storage/WebStorage';
 import difference from 'lodash/difference';
 import intersection from 'lodash/intersection';
 import omit from 'lodash/omit';
@@ -11,18 +13,22 @@ import some from 'lodash/some';
 
 export default class TodoApp {
   constructor() {
-    this.todo = new TodoList();
+    this.tasks = new TaskList();
     this.groups = new GroupList();
-    this.settings = new Settings();
+    this.settings = new ListSettings();
     this.styles = new Styles();
-    this.storage = WebStorageClass('TodoList');
+    try {
+      this.storage = new WebStorageClass('TodoList');
+    } catch (e) {
+      this.storage = null;
+    }
     this.cache = {};
     if (this.storage && this.storage.get()) this.setData(this.storage.get());
     if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
   }
 
-  todoActions(method, groupId, ...args) {
-    const result = this.todo[method](...args);
+  tasksActions(method, groupId, ...args) {
+    const result = this.tasks[method](...args);
     switch (method) {
       case 'add': {
         if (groupId) this.groups.itemAdd(groupId, result);
@@ -61,9 +67,9 @@ export default class TodoApp {
       case 'remove': {
         const id = args[0];
         const groupList = this.groups.getList()[id].list;
-        const list = omit(this.todo.getList(), groupList);
-        const order = difference(this.todo.getOrder(), groupList);
-        this.todo.setData({ list, order });
+        const list = omit(this.tasks.getList(), groupList);
+        const order = difference(this.tasks.getOrder(), groupList);
+        this.tasks.setData({ list, order });
         this.groups.remove(id);
         if (!this.groups.order.length) this.groupsActions('add', 'TodoList');
         break;
@@ -77,21 +83,21 @@ export default class TodoApp {
   }
 
   settingsActions(method, ...args) {
-    const result = this.settings[method](...args);
+    this.settings[method](...args);
     this.updateOrder();
     this.updateStorage();
-    return result;
   }
 
   stylesActions(method, ...args) {
     this.styles[method](...args);
+    this.styles.updateStyle();
     this.updateStorage();
   }
 
   searchAction(query) {
     if (query) {
       const regexp = new RegExp(query, 'gi');
-      const list = this.todo
+      const list = this.tasks
         .getOrderedList()
         .filter(
           task =>
@@ -112,13 +118,13 @@ export default class TodoApp {
   }
 
   getGroups() {
-    const todoOrder = this.todo.getOrder();
+    const tasksOrder = this.tasks.getOrder();
     const groupsOrder = this.groups.getOrder();
-    const taskList = this.todo.getList();
+    const taskList = this.tasks.getList();
     const groupsList = this.groups.getList();
     const groups = groupsOrder.map(groupId => {
       const group = groupsList[groupId];
-      const order = intersection(todoOrder, group.list);
+      const order = intersection(tasksOrder, group.list);
       const list = order.map(i => taskList[i]);
       if (
         !this.cache[groupId] ||
@@ -127,17 +133,16 @@ export default class TodoApp {
         this.cache[groupId] = { order, lastUpdate: Date.now() };
       }
       const lastUpdate = this.cache[groupId].lastUpdate;
-      pullAll(todoOrder, group.list);
+      pullAll(tasksOrder, group.list);
       return { ...group, list, lastUpdate };
     });
-    if (todoOrder.length) {
+    if (tasksOrder.length) {
       groups.push({
         id: null,
         title: 'Без группы',
-        list: todoOrder.map(i => taskList[i]),
+        list: tasksOrder.map(i => taskList[i]),
       });
     }
-    this.updateStorage();
     return groups;
   }
 
@@ -151,15 +156,15 @@ export default class TodoApp {
 
   getData() {
     return {
-      todo: this.todo.getData(),
+      tasks: this.tasks.getData(),
       groups: this.groups.getData(),
       settings: this.settings.getData(),
       styles: this.styles.getData(),
     };
   }
 
-  setData({ todo = null, groups = null, settings = null, styles = null }) {
-    this.todo.setData(todo);
+  setData({ tasks = null, groups = null, settings = null, styles = null }) {
+    this.tasks.setData(tasks);
     this.groups.setData(groups);
     this.settings.setData(settings);
     this.styles.setData(styles);
@@ -167,7 +172,7 @@ export default class TodoApp {
 
   updateOrder() {
     const settings = this.settings.getData();
-    this.todo.updateOrder({
+    this.tasks.updateOrder({
       filter: filterParam[settings.filter].param,
       sort: sortParam[settings.sort].param,
       reverse: settings.reverse,

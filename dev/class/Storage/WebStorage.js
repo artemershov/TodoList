@@ -1,4 +1,4 @@
-class WebStorageClass {
+export default class WebStorage {
   constructor(name, session = false) {
     this.name = name;
     this.storage = session ? sessionStorage : localStorage;
@@ -28,13 +28,3 @@ class WebStorageClass {
     return this.storage.removeItem(this.name);
   }
 }
-
-const WebStorage = (name, session = false) => {
-  try {
-    return new WebStorageClass(name, session);
-  } catch (e) {
-    return null;
-  }
-};
-
-export default WebStorage;

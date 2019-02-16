@@ -1,13 +1,6 @@
-import ExtendedList from './List';
+import ExtendedList from '../List/ExtendedList';
+import Group from './Group';
 import without from 'lodash/without';
-
-class Group {
-  constructor(id, title, list = []) {
-    this.id = id;
-    this.title = title;
-    this.list = list;
-  }
-}
 
 export default class GroupList extends ExtendedList {
   constructor(data) {
@@ -39,5 +32,3 @@ export default class GroupList extends ExtendedList {
     return id;
   }
 }
-
-export { Group, GroupList };
