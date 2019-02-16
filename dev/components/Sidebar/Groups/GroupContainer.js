@@ -1,21 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SimpleForm from '../../shared/SimpleForm';
 import Group from './Group';
 
-export default class GroupContainer extends React.Component {
+class GroupContainer extends React.Component {
   state = { formOpen: false };
 
   formToggle = () => this.setState({ formOpen: !this.state.formOpen });
   formSubmit = value => {
     if (this.props.data.title !== value) {
-      this.props.actions('edit')(this.props.data.id, value);
+      this.props.edit(this.props.data.id, value);
     }
     this.formToggle();
   };
 
   removeGroup = () => {
     if (confirm('Вы точно хотите удалить данную группу и все ее задачи?')) {
-      this.props.actions('remove')(this.props.data.id);
+      this.props.remove(this.props.data.id);
     }
   };
 
@@ -37,3 +38,12 @@ export default class GroupContainer extends React.Component {
       />
     );
 }
+
+const mapDispatch = dispatch => ({
+  edit: (id, data) => dispatch({ type: 'GROUP_EDIT', id, data }),
+  remove: id => dispatch({ type: 'GROUP_REMOVE', id }),
+});
+export default connect(
+  undefined,
+  mapDispatch
+)(GroupContainer);

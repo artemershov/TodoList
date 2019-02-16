@@ -4,7 +4,7 @@ import Comment from './Comment';
 import Placeholder from '../../shared/Placeholder';
 
 export default class Comments extends React.Component {
-  handleSubmit = value => this.props.actions.add(this.props.id, value);
+  handleSubmit = value => this.props.actions.add(value);
   render = () => (
     <Fragment>
       <SimpleForm
@@ -16,7 +16,6 @@ export default class Comments extends React.Component {
         this.props.data.order.map(i => (
           <Comment
             key={i}
-            id={this.props.id}
             data={this.props.data.list[i]}
             remove={this.props.actions.remove}
           />

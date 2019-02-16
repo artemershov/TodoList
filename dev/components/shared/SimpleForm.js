@@ -24,9 +24,7 @@ export default class SimpleForm extends React.Component {
   };
 
   componentDidMount = () => {
-    if (this.props.value) {
-      this.setState({ value: this.props.value });
-    }
+    if (this.props.value) this.setState({ value: this.props.value });
   };
 
   render = () => (

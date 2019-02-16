@@ -5,7 +5,7 @@ import taskPriorities from '../../class/Task/param/taskPriorities';
 const TaskFormPriorities = props => (
   <Input
     type="select"
-    data-prop="priority"
+    name="priority"
     onChange={props.onChange}
     value={props.value}>
     {taskPriorities.levels.map(i => (

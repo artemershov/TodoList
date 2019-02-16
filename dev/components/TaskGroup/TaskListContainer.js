@@ -4,7 +4,7 @@ import Placeholder from '../shared/Placeholder';
 
 const TaskListContainer = props =>
   props.list.length ? (
-    <TaskList list={props.list} actions={props.actions} />
+    <TaskList list={props.list} groupId={props.groupId} />
   ) : (
     <Placeholder
       className="my-4"

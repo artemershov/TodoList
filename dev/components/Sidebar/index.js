@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import Groups from './Groups';
 import Settings from './Settings';
@@ -10,21 +11,12 @@ const SidebarContainer = props => {
       case 'groups':
         return {
           title: 'Редактор групп',
-          content: (
-            <Groups groups={props.groups} actions={props.groupsActions} />
-          ),
+          content: <Groups />,
         };
       case 'settings':
         return {
           title: 'Настройки',
-          content: (
-            <Settings
-              settings={props.settings}
-              settingsActions={props.settingsActions}
-              styles={props.styles}
-              stylesActions={props.stylesActions}
-            />
-          ),
+          content: <Settings />,
         };
       case 'profile':
         return {
@@ -39,10 +31,20 @@ const SidebarContainer = props => {
     }
   })(props.content);
   return (
-    <Sidebar isOpen={props.isOpen} toggle={props.toggle} title={sidebar.title}>
+    <Sidebar
+      isOpen={props.isOpen}
+      toggle={props.hideSidebar}
+      title={sidebar.title}>
       {sidebar.content}
     </Sidebar>
   );
 };
 
-export default SidebarContainer;
+const mapState = state => state.sidebar;
+const mapDispatch = dispatch => ({
+  hideSidebar: () => dispatch({ type: 'SIDEBAR_HIDE' }),
+});
+export default connect(
+  mapState,
+  mapDispatch
+)(SidebarContainer);

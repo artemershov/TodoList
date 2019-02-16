@@ -8,15 +8,15 @@ export default class SubtaskContainer extends React.Component {
   formToggle = () => this.setState({ formOpen: !this.state.formOpen });
   formSubmit = value => {
     if (this.props.data.title !== value) {
-      this.props.actions.edit(this.props.id, this.props.data.id, value);
+      this.props.actions.edit(this.props.data.id, value);
     }
     this.formToggle();
   };
 
-  taskCheck = () => this.props.actions.check(this.props.id, this.props.data.id);
+  taskCheck = () => this.props.actions.check(this.props.data.id);
   taskRemove = () => {
     if (confirm('Вы точно хотите удалить данную задачу?')) {
-      this.props.actions.remove(this.props.id, this.props.data.id);
+      this.props.actions.remove(this.props.data.id);
     }
   };
 

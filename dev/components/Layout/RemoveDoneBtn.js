@@ -1,12 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from 'reactstrap/lib/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons/faTrashAlt';
 
-export default class RemoveDoneBtn extends React.Component {
+class RemoveDoneBtn extends React.Component {
   removeDone = () => {
     if (confirm('Удалить все завершенные задачи?')) {
-      this.props.remove();
+      this.props.dispatch({ type: 'TASK_REMOVE_DONE' });
     }
   };
   render = () => (
@@ -19,3 +20,5 @@ export default class RemoveDoneBtn extends React.Component {
     </Button>
   );
 }
+
+export default connect()(RemoveDoneBtn);

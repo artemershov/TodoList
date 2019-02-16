@@ -6,22 +6,25 @@ const link = new RegExp(
 
 const FormattedText = props => {
   const makeLinks = text =>
-    text.split(' ').map((el, idx) =>
-      link.test(el) ? (
-        <a href={el} target="_blank" rel="noopener noreferrer" key={idx}>
-          {el}{' '}
-        </a>
-      ) : (
-        <Fragment key={idx}>{el} </Fragment>
-      )
-    );
+    text.split(/\s+/).map((el, idx) => (
+      <Fragment key={idx}>
+        {link.test(el) ? (
+          <a href={el} target="_blank" rel="noopener noreferrer">
+            {el}
+          </a>
+        ) : (
+          el
+        )}{' '}
+      </Fragment>
+    ));
   const makeParagraphs = text =>
     text
       .split(/\n\r?/)
-      .map((el, idx) => (
-        <div key={idx}>{el ? makeLinks(el) : <Fragment>&nbsp;</Fragment>}</div>
-      ));
-  return makeParagraphs(props.text);
+      .map((el, idx) =>
+        el ? <div key={idx}>{makeLinks(el)}</div> : <br key={idx} />
+      );
+
+  return makeParagraphs(String(props.text));
 };
 
 export default FormattedText;

@@ -8,7 +8,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 export default class Comment extends React.Component {
   remove = () => {
     if (confirm('Вы точно хотите удалить данный комментарий?')) {
-      this.props.remove(this.props.id, this.props.data.id);
+      this.props.remove(this.props.data.id);
     }
   };
   render = () => (

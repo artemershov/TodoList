@@ -6,12 +6,12 @@ import { faCommentAlt } from '@fortawesome/free-regular-svg-icons/faCommentAlt';
 const subtaskStat = list =>
   list.order.reduce(
     (stat, i) => {
-      stat[list.list[i].done ? 'done' : 'undone']++;
+      stat[list.list[i].done ? 'done' : 'active']++;
       return stat;
     },
     {
       done: 0,
-      undone: 0,
+      active: 0,
     }
   );
 

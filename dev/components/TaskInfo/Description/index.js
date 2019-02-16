@@ -8,7 +8,7 @@ export default class Description extends React.Component {
 
   formToggle = () => this.setState({ formOpen: !this.state.formOpen });
   formSubmit = value => {
-    if (this.props.data !== value) this.props.action(this.props.id, value);
+    if (this.props.data !== value) this.props.action(value);
     this.formToggle();
   };
 

@@ -13,14 +13,8 @@ export default class TaskForm extends React.Component {
     priority: 0,
     deadline: null,
   };
-  handleChange = e => {
-    const data = e.target.value;
-    const prop = e.target.dataset.prop;
-    this.setState({ [prop]: data });
-  };
-  handleDatapicker = date => {
-    this.setState({ deadline: date });
-  };
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  handleDatapicker = date => this.setState({ deadline: date });
   handleSubmit = e => {
     e.preventDefault();
     const { priority, deadline } = this.state;
@@ -36,13 +30,12 @@ export default class TaskForm extends React.Component {
       this.setState({ title: '' });
     }
   };
-  resetForm = () => {
+  resetForm = () =>
     this.setState({
       title: '',
       priority: 0,
       deadline: null,
     });
-  };
   componentDidMount = () => {
     if (this.props.data) {
       const { title, priority } = this.props.data;
@@ -60,7 +53,7 @@ export default class TaskForm extends React.Component {
       onSubmit={this.handleSubmit}>
       <div className="flex-fill">
         <Input
-          data-prop="title"
+          name="title"
           onChange={this.handleChange}
           value={this.state.title}
           maxLength="200"

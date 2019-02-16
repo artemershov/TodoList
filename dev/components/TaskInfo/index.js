@@ -35,21 +35,18 @@ export default class TaskInfo extends React.Component {
       <TabContent className="px-2" activeTab={this.state.activeTab}>
         <TabPane tabId="0">
           <Description
-            id={this.props.data.id}
             data={this.props.data.description}
             action={this.props.actions.description}
           />
         </TabPane>
         <TabPane tabId="1">
           <Subtasks
-            id={this.props.data.id}
             data={this.props.data.subtasks}
             actions={this.props.actions.subtasks}
           />
         </TabPane>
         <TabPane tabId="2">
           <Comments
-            id={this.props.data.id}
             data={this.props.data.comments}
             actions={this.props.actions.comments}
           />
