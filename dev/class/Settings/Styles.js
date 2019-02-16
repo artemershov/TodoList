@@ -1,5 +1,4 @@
 import defaultStyle from './param/defaultStyle';
-import { bgColors } from './param/colors';
 
 export default class Styles {
   constructor(data = null) {
@@ -9,7 +8,7 @@ export default class Styles {
     return {
       url: this.url,
       color: this.color,
-      strech: this.strech,
+      stretch: this.stretch,
     };
   }
   setBgUrl(data) {
@@ -18,24 +17,12 @@ export default class Styles {
   setBgColor(data) {
     this.color = data;
   }
-  setBgStrech(data) {
-    this.strech = data;
+  setBgStretch(data) {
+    this.stretch = data;
   }
-  setData({ url, color, strech } = defaultStyle) {
+  setData({ url, color, stretch } = defaultStyle) {
     this.url = url;
     this.color = color;
-    this.strech = strech;
-  }
-  updateStyle() {
-    const body = document.body;
-    body.classList.remove(...bgColors);
-    body.classList.add('bg-' + this.color);
-    if (this.url) {
-      body.style.backgroundImage = 'url(' + this.url + ')';
-      body.style.backgroundRepeat = 'repeat';
-      body.style.backgroundAttachment = 'fixed';
-      body.style.backgroundPosition = 'center';
-      body.style.backgroundSize = this.strech ? 'cover' : 'auto';
-    }
+    this.stretch = stretch;
   }
 }

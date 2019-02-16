@@ -1,9 +1,7 @@
-import colors from './colors';
-
 const defaultStyle = {
   url: '',
-  color: colors[0],
-  strech: true,
+  color: 'blue',
+  stretch: true,
 };
 
 export default defaultStyle;

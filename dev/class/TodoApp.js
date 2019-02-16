@@ -90,7 +90,6 @@ export default class TodoApp {
 
   stylesActions(method, ...args) {
     this.styles[method](...args);
-    this.styles.updateStyle();
     this.updateStorage();
   }
 

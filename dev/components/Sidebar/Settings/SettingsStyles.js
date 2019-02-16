@@ -8,90 +8,28 @@ import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
+import colors from '../../../class/Settings/param/colors';
 
 const SettingsStyles = props => (
   <Fragment>
     <FormGroup>
       <Label>Фоновый цвет</Label>
       <Row noGutters>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="primary"
-            value="primary"
-            onClick={props.setBgColor}>
-            {props.color == 'primary' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="info"
-            value="info"
-            onClick={props.setBgColor}>
-            {props.color == 'info' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="success"
-            value="success"
-            onClick={props.setBgColor}>
-            {props.color == 'success' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="warning"
-            value="warning"
-            onClick={props.setBgColor}>
-            {props.color == 'warning' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="danger"
-            value="danger"
-            onClick={props.setBgColor}>
-            {props.color == 'danger' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
-        <Col className="p-2" xs="4">
-          <Button
-            className="d-block w-100"
-            color="dark"
-            value="dark"
-            onClick={props.setBgColor}>
-            {props.color == 'dark' ? (
-              <FontAwesomeIcon icon={faCheck} />
-            ) : (
-              <span>&nbsp;</span>
-            )}
-          </Button>
-        </Col>
+        {Object.keys(colors).map((el, idx) => (
+          <Col key={idx} className="p-2" xs="4">
+            <Button
+              className="d-block w-100 text-white border-0"
+              style={{ backgroundColor: colors[el] }}
+              value={el}
+              onClick={props.setBgColor}>
+              {props.color == el ? (
+                <FontAwesomeIcon icon={faCheck} />
+              ) : (
+                <Fragment>&nbsp;</Fragment>
+              )}
+            </Button>
+          </Col>
+        ))}
       </Row>
     </FormGroup>
     <FormGroup>
@@ -107,8 +45,8 @@ const SettingsStyles = props => (
       <Label check>
         <Input
           type="checkbox"
-          onChange={props.setBgStrech}
-          checked={props.strech || false}
+          onChange={props.setBgStretch}
+          checked={props.stretch || false}
         />
         Растянуть
       </Label>
@@ -121,8 +59,8 @@ const mapDispatch = dispatch => ({
   setBgUrl: e => dispatch({ type: 'STYLES_SET_BG_URL', data: e.target.value }),
   setBgColor: e =>
     dispatch({ type: 'STYLES_SET_BG_COLOR', data: e.currentTarget.value }),
-  setBgStrech: e =>
-    dispatch({ type: 'STYLES_SET_BG_STRECH', data: e.target.checked }),
+  setBgStretch: e =>
+    dispatch({ type: 'STYLES_SET_BG_STRETCH', data: e.target.checked }),
 });
 export default connect(
   mapState,

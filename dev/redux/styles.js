@@ -3,7 +3,7 @@ import { TodoApp } from './index';
 const actions = {
   setUrl: 'STYLES_SET_BG_URL',
   setColor: 'STYLES_SET_BG_COLOR',
-  setStrech: 'STYLES_SET_BG_STRECH',
+  setStretch: 'STYLES_SET_BG_STRETCH',
 };
 
 const reducer = (state, action) => {
@@ -14,8 +14,8 @@ const reducer = (state, action) => {
     case actions.setColor:
       TodoApp.stylesActions('setBgColor', action.data);
       break;
-    case actions.setStrech:
-      TodoApp.stylesActions('setBgStrech', action.data);
+    case actions.setStretch:
+      TodoApp.stylesActions('setBgStretch', action.data);
       break;
   }
   return TodoApp.getStyles();
